@@ -1,0 +1,28 @@
+<%= form_for @brand do |f| %>
+	<% if @brand.errors.any? %>
+		<div id="error_explanation">
+			<h4><%= pluralize(@brand.errors.count, "error") %> Their are some error occured when saving brand details:</h4>
+
+			<ul>
+				<% @brand.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="field">
+		<%= f.label :brand_name %>
+		<%= f.text_field :brand_name %>
+	</div>
+
+	<div class="field">
+		<%= f.label :description %>
+		<%= f.text_area :description %>
+	</div>
+
+	<div class="actions">
+		<%= f.submit %>
+	</div>
+
+<% end %>

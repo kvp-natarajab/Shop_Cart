@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ecommerce</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body>
+
+<div class="container-fluid">
+
+	<div class="header-container">
+		<div id="sticky-anchor"></div>
+		<div class="search-wrapper-full-width">
+			<div class="header-wrapper">
+					<div class="top-search-header">
+						<ul class="search-menu-bar">
+							<li><a href="">Login</a></li>
+							<li><%= link_to 'Signup', new_customer_registration_path %></li>
+							<li><%= link_to 'Sell', new_seller_registration_path %></a></li>
+						</ul>
+					</div> 
+			</div>
+		</div>
+		
+		<div class="search-wrapper-full-width" id="sticky">
+			<div class="search-bar">
+				<div class="logo-wrapper">
+					<a href=""><img src="assets/logo.png"></a>
+				</div>
+				<form action="" method="post">
+						<span class="glyphicon glyphicon-search">
+							<input type="text" class="search-text" placeholder="So, what are you wishing for today?" data-autocomplete="products/autocomplete_product_product_name">
+						</span>
+						<input type="button" value="SEARCH" class="search-btn">
+						<span class="glyphicon glyphicon-shopping-cart">
+							<input type="button" value="CART" class="cart-btn">
+							<span class="badge">0</span>
+						</span>
+				</form> 
+			</div>
+		</div>
+	</div>
+		<nav class="nav-container">
+			<div class="bottom-search-header">
+				<ul class="nav navbar-nav">
+					<% @category = Category.all %>
+					<% @category.each do |category| %>
+			      	 <li class="dropdown">
+					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= category.name %><span class="caret"></span></a>
+					          <ul class="dropdown-menu">
+					            <% @subcategory = Subcategory.where(:category_id => category.id )%>
+					            <% @subcategory.each do |subcat| %>
+						            <li class="dropdown-header">
+						            	<a href="#"><%= subcat.name %></a>
+						            </li>
+					            <% end %>
+					          </ul>
+					 </li>
+					<% end %>
+				</ul>
+			</div>
+		</nav> 
+		
+	</div>
+	<div class="center-container">
+		<%= yield %>
+		
+	</div>
+</div>
+</body>
+</html>
