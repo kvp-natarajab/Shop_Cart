@@ -18,22 +18,24 @@ class ApplicationController < ActionController::Base
     	end
     end
 
-    devise_parameter_sanitizer.for(:sign_in) do |user_params|
-    	if resource_class == Customer
-    		user_params.permit(:login, :phone, :email, :pasword, :remember_me)
-    	elsif resource_class == Seller
-    		user_params.permit(:login, :phone, :email, :pasword, :remember_me)
-    	end
-    end
+    # devise_parameter_sanitizer.for(:sign_in) do |user_params|
+    # 	if resource_class == Customer
+    # 		user_params.permit(:login, :phone, :email, :password, :remember_me)
+    # 	elsif resource_class == Seller
+    # 		user_params.permit(:login, :phone, :email, :password, :remember_me)
+    # 	end
+    # end
+
+    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password, :remember_me) }
 
    
-    devise_parameter_sanitizer.for(:account_update) do |user_params| 
-    	if resource_class == Customer
-    		user_params.permit(:name, :email, :phone, :password, :password_confirmation, :address, :land_mark, :city, :state, :country, :pincode, :current_password) 
-    	elsif resource_class == Seller
-    		user_params.permit(:company_name, :contact_person, :phone, :address, :password, :password_confirmation, :email, :city, :state, :country, :pincode, :status, :current_password) 
-    	end		
-    end
+    # devise_parameter_sanitizer.for(:account_update) do |user_params| 
+    # 	if resource_class == Customer
+    # 		user_params.permit(:name, :email, :phone, :password, :password_confirmation, :address, :land_mark, :city, :state, :country, :pincode, :current_password) 
+    # 	elsif resource_class == Seller
+    # 		user_params.permit(:company_name, :contact_person, :phone, :address, :password, :password_confirmation, :email, :city, :state, :country, :pincode, :status, :current_password) 
+    # 	end		
+    # end
   end
 
 end

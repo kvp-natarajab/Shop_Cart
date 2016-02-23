@@ -1,13 +1,4 @@
 class Customer < ActiveRecord::Base
-	attr_accessor :login
-
-	def login=(login)
-    	@login = login
-  	end
-
-	def login
-	    @login || self.phone || self.email
-	end
 	
 	has_many :orders
 	

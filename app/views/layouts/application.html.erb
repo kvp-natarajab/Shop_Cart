@@ -2,6 +2,11 @@
 <html>
 <head>
   <title>Ecommerce</title>
+   <link href="assests/stylesheets/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+  <link href="assests/stylesheets/non-responsive.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="assets/javascript/ie-emulation-modes-warning.js"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -13,6 +18,69 @@
 <body>
 
 <div class="container-fluid">
+		<header class="header text-center">
+	
+		</header>
+
+		
+				 <nav class="navbar navbar-default navbar-fixed-top">
+					  <div class="container">
+					    <div class="navbar-header">
+					   
+					      <a class="navbar-brand" href="#">Shopping Cart</a>
+					    </div> 
+					    
+					    <div id="navbar">
+					      <ul class="nav navbar-nav">
+					      	<li class="active"><%= link_to 'Home', "/"%></li>
+							<li><%= link_to 'Dashboard', new_customer_registration_path %></li>
+					        <li class="dropdown">
+					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+					          <ul class="dropdown-menu">
+					            <% @categories = Category.all %>
+					            <% @categories.each do |category| %>
+					            	<li><%= link_to category.name, cartpages_index_path(:search => category.name) %></li>
+					            <% end %>
+					          </ul>
+					        </li>
+
+					      </ul>
+					      <form class="navbar-form navbar-left" role="search">
+					        <div class="search-text">
+					          <input type="text" class="form-control" placeholder="Search" style="width:350px">
+					           <button type="submit" class="btn btn-default">Search</button>
+					        </div>
+					       
+					      </form>
+					      <ul class="nav navbar-nav navbar-right">
+					      		<li><%= link_to 'Seller', new_seller_registration_path %></li>
+								<li><%= link_to 'Customer', new_customer_registration_path %></li>
+					        	<li>
+									<% if customer_signed_in? %>
+					    			<p><%= current_customer.email %> <%= link_to 'Logout', destroy_customer_session_path, :method => :delete %></p>
+					    			<% elsif seller_signed_in? %>
+					    			<p><%= current_seller.email %> <%= link_to 'Logout', destroy_seller_session_path, :method => :delete %></p>
+					    			<% end %>
+					    			
+					          	</li>
+					        </li> 
+
+					      </ul>
+					    </div><!--/.nav-collapse -->
+					  </div>
+		    	</nav>
+    		<div class="center-container">
+    			<div class="left-side-container">
+					
+				</div>
+				<div class="right-side-container">
+					<%= yield %>
+				</div>
+			</div>
+	
+
+
+<!-- <div class="container-fluid">
 
 	<div class="header-container">
 		<div id="sticky-anchor"></div>
@@ -71,7 +139,7 @@
 	<div class="center-container">
 		<%= yield %>
 		
-	</div>
+	</div> -->
 </div>
 </body>
 </html>

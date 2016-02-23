@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218060206) do
+ActiveRecord::Schema.define(version: 20160222070757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "brands", force: :cascade do |t|
     t.string   "brand_name",     limit: 100
@@ -87,22 +88,19 @@ ActiveRecord::Schema.define(version: 20160218060206) do
   add_index "orders", ["shipper_id"], name: "index_orders_on_shipper_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.string   "product_name",        limit: 80
+    t.string   "product_name",   limit: 80
     t.text     "description"
-    t.decimal  "unit_price",                     precision: 5, scale: 2
+    t.decimal  "unit_price",                precision: 5, scale: 2
     t.integer  "total_unit"
     t.integer  "unit_in_stock"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.string   "avatar"
     t.integer  "discount"
     t.integer  "seller_id"
     t.integer  "category_id"
     t.integer  "subcategory_id"
     t.integer  "brand_id"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
   end
 
   add_index "products", ["brand_id"], name: "index_products_on_brand_id", using: :btree

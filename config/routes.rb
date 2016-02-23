@@ -3,9 +3,14 @@ Rails.application.routes.draw do
   root :controller => 'static_page', :action => 'home' 
   # get 'static_page/home'
 
-  devise_for :sellers, controllers: { registrations: 'sellers/registrations' }
-  # devise_for :customers
-  devise_for :customers, controllers: { registrations: 'customers/registrations' }
+  get 'cartpages/index'
+  devise_for :sellers, controllers: {
+        sessions: 'sellers/sessions'
+      }
+
+  devise_for :customers, controllers: {
+        sessions: 'customers/sessions'
+      }
   
   resources :categories
   resources :subcategories

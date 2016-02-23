@@ -1,0 +1,9 @@
+<% @products.each do |product| %>
+		<div class="product-display">
+			<%= link_to image_tag(product.image_url(:thumb)), new_order_path(:product => product.id) %><br/>
+			<b><%= product.product_name %></b><br/>
+			Rs.<%= product.unit_price %><br/>
+			<%= link_to 'Place Order', new_order_detail_path %>
+		</div>
+<% end %>
+
