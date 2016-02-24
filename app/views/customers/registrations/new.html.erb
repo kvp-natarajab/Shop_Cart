@@ -37,26 +37,19 @@
     <%= f.text_area :address, autofocus: true, class:"form-control" %>
   </div>
 
-
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.select :country, autofocus: true, class:"countries form-control" %>
+   <div class="field">
+    <%= f.label :pincode %><br />
+    <%= f.number_field :pincode, autofocus: true, class:"form-control" %>
   </div>
- <select name="country" class="countries" id="countryId">
-<option value="">Select Country</option>
-</select>
-<select name="state" class="states" id="stateId">
-<option value="">Select State</option>
-</select>
-<select name="city" class="cities" id="cityId">
-<option value="">Select City</option>
-</select>
+
+  <%= f.select :country, CountryStateSelect::Constant::COUNTRIES, {}, id: 'country_id' %>
+ 
 
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="http://lab.iamrohit.in/js/location.js"></script>
+  <%= javascript_include_tag 'country_city_state', 'data-turbolinks-track' => true %>
+ 
 <% end %>
 
 <%= render "customers/shared/links" %>

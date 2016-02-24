@@ -25,7 +25,10 @@
     <%= f.label :address %><br />
     <%= f.text_area :address, autofocus: true, class:"form-control" %>
   </div>
+   <%= f.select :country, CountryStateSelect.countries.invert, {}, id: 'country_id', :class=>'chosen-select' %>
 
+  
+ <%= f.select :state ,{},:id=>'state_name' %>
 
   <div class="field">
     <%= f.label :city %><br />

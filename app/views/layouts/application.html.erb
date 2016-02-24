@@ -4,74 +4,54 @@
   <title>Ecommerce</title>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.js">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-
+<%= javascript_include_tag "autocomplete-rails.js" %>
 </head>
 <body>
 
-<div class="container-fluid">
-
-	<div class="header-container">
-		<div id="sticky-anchor"></div>
-		<div class="search-wrapper-full-width">
-			<div class="header-wrapper">
-					<div class="top-search-header">
-						<ul class="search-menu-bar">
-							<li><a href="">Login</a></li>
-							<li><%= link_to 'Signup', new_customer_registration_path %></li>
-							<li><%= link_to 'Sell', new_seller_registration_path %></a></li>
-						</ul>
-					</div> 
-			</div>
-		</div>
-		
-		<div class="search-wrapper-full-width" id="sticky">
-			<div class="search-bar">
-				<div class="logo-wrapper">
-					<a href=""><img src="assets/logo.png"></a>
-				</div>
-				<form action="" method="post">
-						<span class="glyphicon glyphicon-search">
-							<input type="text" class="search-text" placeholder="So, what are you wishing for today?" data-autocomplete="products/autocomplete_product_product_name">
-						</span>
-						<input type="button" value="SEARCH" class="search-btn">
-						<span class="glyphicon glyphicon-shopping-cart">
-							<input type="button" value="CART" class="cart-btn">
-							<span class="badge">0</span>
-						</span>
-				</form> 
-			</div>
-		</div>
-	</div>
-		<nav class="nav-container">
-			<div class="bottom-search-header">
-				<ul class="nav navbar-nav">
-					<% @category = Category.all %>
-					<% @category.each do |category| %>
-			      	 <li class="dropdown">
-					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= category.name %><span class="caret"></span></a>
-					          <ul class="dropdown-menu">
-					            <% @subcategory = Subcategory.where(:category_id => category.id )%>
-					            <% @subcategory.each do |subcat| %>
-						            <li class="dropdown-header">
-						            	<a href="#"><%= subcat.name %></a>
-						            </li>
-					            <% end %>
-					          </ul>
-					 </li>
-					<% end %>
-				</ul>
-			</div>
-		</nav> 
-		
-	</div>
-	<div class="center-container">
-		<%= yield %>
-		
-	</div>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="assets/logo.png"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+           <li><%= link_to 'Signup', new_customer_registration_path %></li>
+			<li><%= link_to 'Sell', new_seller_registration_path %></a></li>
+            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+     <script>window.jQuery || document.write('<script src="jquery.min.js"><\/script>')</script>
+    <script src="bootstrap.min.js"></script>
 </body>
 </html>

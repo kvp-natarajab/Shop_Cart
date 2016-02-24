@@ -15,7 +15,18 @@
 //= require turbolinks
 //= require_tree .
 
-//= require chosen-jquery
+//= require jquery-ui
+//= require autocomplete-rails
+//= require jquery
+//= require jquery_ujs
+
+
+$(document).on('ready page:load', function() {
+  return CountryStateSelect({
+    country_id: "country_id",
+    state_id: "state_id"
+  });
+});
 
 function sticky_relocate() {
 	var window_top = $(window).scrollTop();

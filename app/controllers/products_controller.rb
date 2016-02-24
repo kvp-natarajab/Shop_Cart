@@ -3,7 +3,17 @@ class ProductsController < ApplicationController
 	before_action :set_product, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@product = Product.all
+		# if params[:term]
+  #  			 @product = Product.find(:all,:conditions => ['product_name LIKE ?', "#{params[:term]}%"])
+		# else
+		   	 @product = Product.all
+		# end
+
+		# respond_to do |format|  
+		# 	format.html 
+		# 	format.json { render :json => @product.to_json }
+		# 	raise @product.inspect
+  #   	end
 	end
 
 	def new

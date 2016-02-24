@@ -27,7 +27,10 @@ gem 'devise'
 
 gem 'country_state_select'
 
-gem 'rails3-jquery-autocomplete'
+gem 'rails4-autocomplete'
+
+# jQuery UI dependency.
+gem 'jquery-ui-rails'
 
 gem 'chosen-rails'
 

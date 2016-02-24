@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   resources :brands
   resources :shippers
   resources :orders
-  resources :products do
+  # resources :products
+  resources :products
+  resources :applications do
     get :autocomplete_product_product_name, :on => :collection
   end
   # resources :products
