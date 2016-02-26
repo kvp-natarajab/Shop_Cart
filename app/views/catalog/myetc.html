@@ -1,0 +1,23 @@
+<!-- 	<%= link_to image_tag(product.image_url(:thumb)), new_order_path(:product => product.id) %><br/> -->
+
+
+
+ <%if signed_in?%>
+    <%=link_to "", class: "button", data: {target: @cart_action, addUrl: add_to_cart_path(@product), removeUrl: remove_from_cart_path(@product)} do%>
+      <span><%=@cart_action%></span> Cart
+    <%end%>
+
+
+
+
+    #order show
+ <%= link_to 'Place Order', new_order_path %>
+
+
+
+
+
+
+
+
+  <!--  <input type="number" id="quantity<%=quantity%>"> -->

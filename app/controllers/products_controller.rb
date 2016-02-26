@@ -1,19 +1,9 @@
 class ProductsController < ApplicationController
-	before_action :authenticate_seller!
+	# before_action :authenticate_seller!, only: [:create, :edit, :destroy, :update]
 	before_action :set_product, only: [:show, :edit, :update, :destroy]
 
 	def index
-		# if params[:term]
-  #  			 @product = Product.find(:all,:conditions => ['product_name LIKE ?', "#{params[:term]}%"])
-		# else
-		   	 @product = Product.all
-		# end
-
-		# respond_to do |format|  
-		# 	format.html 
-		# 	format.json { render :json => @product.to_json }
-		# 	raise @product.inspect
-  #   	end
+		 @product = Product.all
 	end
 
 	def new
@@ -36,7 +26,7 @@ class ProductsController < ApplicationController
 
 	def update
 		respond_to do |format|
-			if @product.upadte(product_paramas)
+			if @product.update(product_paramas)
 				format.html { redirect_to @product, notice:"Product details successfully updated." }
 				format.json { render :show, status: :ok,location: @product }
 			else
@@ -46,10 +36,23 @@ class ProductsController < ApplicationController
 		end
 	end
 
+	def show
+		  # @cart_action = @product.cart_action current_customer.try :id
+	end
+
+	def search
+		@products = Product.select(:product_name,).where('product_name LIKE ?', "#{params[:search_text]}%")
+		render json: @products.map(&:product_name)	
+	end
+
 	private
 
 	def set_product
-		@product = Product.find(params[:id])
+		if params[:search_text]
+			@products = Product.where('product_name LIKE ?', "#{params[:search_text]}%")
+		else
+			@product = Product.find(params[:id])
+		end
 	end
 
 	def product_paramas

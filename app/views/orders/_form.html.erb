@@ -1,0 +1,30 @@
+<%= form_for @order do |f| %>
+	<% if @order.errors.any? %>
+		<div id="error_explanation">
+			<h4><%= pluralize(@order.errors.count, "error") %> Their are some error occured when saving order details:</h4>
+
+			<ul>
+				<% @order.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="field">
+		<%= f.hidden_field :customer_id, value: current_customer.id %>
+	</div>
+
+	<div class="field">
+
+		<%= f.hidden_field :ordernumber, value: current_customer.order_number, :disabled => true %>
+	</div>
+
+	<div class="field">
+		<%= f.hidden_field :order_date, value: Time.now, :disabled => true %>
+	</div>
+
+	<div class="field">
+		<%= f.submit "OK" %>
+	</div>
+
+<% end %>

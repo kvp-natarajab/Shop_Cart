@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mycart</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<form action="/products/search/" method="get">
+	<input type="text" name="search_text" id="search_text">
+	<input type="submit" value="search">
+</form>
+
+ <ul class="dropdown-menu">
+    <% @categories=Category.all %>
+    <% @categories.each do |category| %>
+			<li><%= link_to category.name, catalog_index_path(:id => category.id) %></a></li>
+    		<li role="separator" class="divider"></li> 
+    <% end %>
+ </ul>
+
+ <p class="notice"><%= notice %></p>
+ <p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+<%= link_to 'Logout', destroy_seller_session_path, :method => :delete %>
+
+</body>
+</html>
+
+ <script>
+
+
+$(function () {
+    var selectItem = function (event, ui) {
+        window.location.replace("/catalog/index?product_name="+ui.item.value);
+        return false;
+    }
+    $("#search_text").autocomplete({
+        source: function (request, response) {
+        	$.get(
+            "/products/search/"+request.term,
+            function (data) {
+            	response(data)
+            });
+    },
+        select: selectItem,
+        minLength: 1
+    });
+});
+</script>

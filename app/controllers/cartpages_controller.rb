@@ -1,2 +1,0 @@
-class CartpagesController < ApplicationController
-end

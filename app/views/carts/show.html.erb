@@ -1,0 +1,18 @@
+<h1>MyCart</h1>
+<h3>Hello you have added <%= current_customer.cart_count %> products in catalog </h3>
+<% quantity = 0 %>
+<%= form_tag("/orders/new", method: "get") do %>
+  <%(1..5).each do |i|%>
+<%= text_field_tag(:name, :name => "post[name][]", :id => "post_name_#{i}") %>
+<%end%>
+        <% @cart_products.each do |cart_product| %>
+                <%= label_tag(:quantity) %>
+                <% quantity+=1 %>
+                <%= text_field_tag(:q,name:"" ,:id => "quantity#{quantity}")%>
+                <%= image_tag cart_product.avatar.url(:thumb) %>
+                <%= cart_product.unit_price %>
+                <%= link_to 'Remove', remove_from_cart_path(cart_product), method: :put %>
+            
+        <% end %>
+          <%= submit_tag("Place Order") %>
+<% end %>

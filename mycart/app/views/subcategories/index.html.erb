@@ -1,0 +1,14 @@
+<table class="display-table">
+	<tr>
+		<th>Sub Category Name</th>
+		<th>Description</th>
+		<th>Category</th>
+	</tr>
+	<% @subcategory.each do |subcat| %>
+	<tr>
+		<td><%= subcat.name %></td>
+		<td><%= subcat.description %></td>
+		<td><%= subcat.category.name %></td>
+	</tr>
+	<% end %>
+</table>

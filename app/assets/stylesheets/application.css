@@ -11,127 +11,13 @@
  * file per style scope.
  *
  *= require chosen
+ *= require jquery-ui
  *= require_tree .
  *= require_self
  */
 
-.container-fluid {
-    padding-right: 0px;
-    padding-left: 0px;
-    margin-right: auto;
-    margin-left: auto;
-}
-.form-container{
-	padding-left: 50px;
-	width:400px;
-}
-
-.header-container{
-	height: auto; 
-	color: #000;
-	background: #027cd5 none repeat scroll 0 0;
-}
-
-.header-wrapper,.search-bar{
-	width: 978px;
-	margin:0 auto;
-	height: auto;
-}
-.search-wrapper-full-width{
-	width:100%;
-	background: #027cd5 none repeat scroll 0 0;
-}
-.logo-wrapper{
-	height: auto;
-	float:left;
-}
-.search-bar{
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-#sticky.stick {
-	background: #027cd5 none repeat scroll 0 0;
-    position: fixed;
-    top: 0;
-    z-index: 10000;
-    margin: 0 auto;
-    width:100%;
-}
-.search-menu-bar{
-	height: 20px;
-	padding-top:5px;
-}
-.dropdown-toggle{
-	color:#fff;
-}
-
-.search-menu-bar li{
-	float: right;
-	list-style-type: none;
-}
-
-.search-menu-bar li a{
-	text-decoration: none;
-	color:#fff;
-	float: left;
-	margin-left:15px;
-}
-
-.nav-container{
-	 background-color: #006cb4;
-	 height: 50px;
-	 text-align: center;
-}
-.bottom-search-header{
-	width: 978px;
-	margin:0 auto;
-}
-.search-text{
-	width:535px;
-	height: 38px;
-	border:0px;
-}
-.glyphicon-search{
-	background-color: #fff;
-	padding-left:10px;
-}
-.glyphicon-shopping-cart{
-	background-color: #006CB4;
-	padding-left: 6px;
-	padding-right: 10px;
-}
-
-.cart-btn{
-	width:60px;
-	height: 38px;
-	background-color: #006CB4;
-	border:0px;
-}
-.search-btn{
-	width:114px;
-	height: 38px;
-	background-color: #fdd922;
-	border: 1px solid #e0bc27;
-    border-radius:2px;
-    color: #565656;
-    cursor: pointer;
-    line-height: 17px;
-    margin: 0px;
-    text-transform: uppercase;
-}
-.dropdown-toggle{
-	text-transform: uppercase;
-}
-body {
-    color: #333;
-    font-family: arial,tahoma,verdana,sans-serif;
-    font-size: 13px;
-    min-width: 978px;
-    overflow-y: auto;
-    position: static;
-    text-align: left;
-    width: 100%;
-}
-.center-container{
-	min-height: 700px;
+.button{
+	width:200px;
+	height:100px;
+	color:red;
 }

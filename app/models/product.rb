@@ -1,5 +1,14 @@
 class Product < ActiveRecord::Base
-  belongs_to :category
+
+  def cart_action(current_customer_id)
+    if $redis.sismember "cart#{current_customer_id}", id
+      "Remove from"
+    else
+      "Add to"
+    end
+  end
+
+ 	belongs_to :category
   belongs_to :subcategory
   belongs_to :brand
   belongs_to :seller

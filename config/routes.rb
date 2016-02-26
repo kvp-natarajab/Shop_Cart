@@ -1,23 +1,35 @@
 Rails.application.routes.draw do
 
-  root :controller => 'static_page', :action => 'home' 
-  # get 'static_page/home'
+
+  get 'carts/show'
+
+  devise_for :customers, controllers: { registrations: 'customers/registrations' }
 
   devise_for :sellers, controllers: { registrations: 'sellers/registrations' }
-  # devise_for :customers
-  devise_for :customers, controllers: { registrations: 'customers/registrations' }
+
+  root :controller => 'home', :action => 'index'
   
+  get 'catalog/index'
+ 
+  resources :products
+  resources :brands
   resources :categories
   resources :subcategories
-  resources :brands
+  # resources :orders
   resources :shippers
-  resources :orders
-  # resources :products
-  resources :products
-  resources :applications do
-    get :autocomplete_product_product_name, :on => :collection
+
+  resource :cart, only: [:show] do
+    put 'add/:product_id', to: 'carts#add', as: :add_to
+    put 'remove/:product_id', to: 'carts#remove', as: :remove_from
   end
-  # resources :products
+  # resource :cart, only: [:show] do
+  #   put 'add/:product_id', to: 'carts#add', as: :add_to
+  #   put 'add/:product_id', to: 'carts#remove', as: :remove_from
+  # end
+  get "/orders/new" => "orders#new"
+  get "/products/search/:search_text" => "products#search", as: :search
+  get "orders/show"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
