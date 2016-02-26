@@ -16,8 +16,6 @@
  *= require_self
  */
 
-.button{
-	width:200px;
-	height:100px;
-	color:red;
+.alert-message-container{
+	padding-top: 100px;
 }

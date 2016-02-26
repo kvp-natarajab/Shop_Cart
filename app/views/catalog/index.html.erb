@@ -1,7 +1,13 @@
-<% @products.each do |product| %>
-		<div class="product-display">
-			<%= link_to image_tag(product.avatar.url(:thumb)), product_path(product) %>
-			<b><%= product.product_name %></b><br/>
-			Rs.<%= product.unit_price %><br/>
+<div class="product-container">
+	<% @products.each do |product| %>
+		<div class="product-wrapper">
+			<div class="product-display">
+				<%= link_to image_tag(product.avatar.url(:thumb)), product_path(product) %>
+			</div>
+			<div class="product-description">
+				<b><%= product.product_name %></b><br/>
+				&#8377;<%= product.unit_price %><br/>
+			</div>
 		</div>
-<%end%>
+	<%end%>
+</div>

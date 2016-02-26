@@ -18,6 +18,24 @@
 //= require jquery-ui
 //= require_tree .
 
+$(function () {
+    var selectItem = function (event, ui) {
+        window.location.replace("/catalog/index?product_name="+ui.item.value);
+        return false;
+    }
+    $("#search_text").autocomplete({
+        source: function (request, response) {
+        	$.get(
+            "/products/search/"+request.term,
+            function (data) {
+            	response(data)
+            });
+    },
+        select: selectItem,
+        minLength: 1
+    });
+});
+
 $(document).on('ready page:load', function() {
 return CountryStateSelect({
 	country_id: "seller_country",

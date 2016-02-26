@@ -10,73 +10,39 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<div class="container-fluid">
-    <nav>
-           <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Category
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <% @categories=Category.all %>
-                    <% @categories.each do |category| %>
-                      <li><%= link_to category.name, catalog_index_path(:id => category.id) %></a></li>
-                      <li role="separator" class="divider"></li> 
-                    <% end %>
-                </ul>
-            </div>
-            <form action="/products/search/" method="get">
-                <input type="text" name="search_text" id="search_text">
-                <input type="submit" value="search">
+  <div class="container-fluid">
+    <%= render "layouts/header" %>
+    <%= render "layouts/alerts" %>
+    <form action="/products/search/" method="get">   
+                  <input type="text" name="search_text" id="search_text">
+                    <input type="submit" value="search">
             </form>
-            <ul class="right">
-            <% if customer_signed_in? %>
-              <li>
-                  <%= link_to cart_path do%>
-                   <span  class="glyphicon glyphicon-shopping-cart"></span> My Cart (<span class="cart-count"><%= current_customer.cart_count %></span>)
-                  <%end%>
-              </li>
-              <li><%=link_to current_customer.email, edit_customer_registration_path%></li>
-              <li><%=link_to "Logout", destroy_customer_session_path, method: :delete%></li>
-            <%else%>
-              <li><%=link_to "Register", new_customer_registration_path %></li>
-              <li><%=link_to "Login", new_customer_session_path%></li>
-            <%end%>
-            <% if seller_signed_in? %>
-              <li><%= link_to "Logout", destroy_seller_session_path, :method => :delete %></li>
-            <% else %>
-              <li><%=link_to "Seller", new_seller_registration_path %></li>
-            <% end %>
-          </ul>
-    </nav>
-
-    <div>
-           <p class="notice"><%= notice %></p>
-           <p class="alert"><%= alert %></p>
-    </div>
-          <%= yield %>
-          
+    <%= yield %>          
   </div>
 </body>
 </html>
-
- <script>
-
-
-$(function () {
+<script>
+  $(function () {
     var selectItem = function (event, ui) {
         window.location.replace("/catalog/index?product_name="+ui.item.value);
         return false;
     }
     $("#search_text").autocomplete({
         source: function (request, response) {
-        	$.get(
+          $.get(
             "/products/search/"+request.term,
             function (data) {
-            	response(data)
+              response(data)
             });
     },
         select: selectItem,
         minLength: 1
     });
 });
-</script>
+</script
+
+
+
+
+
+
