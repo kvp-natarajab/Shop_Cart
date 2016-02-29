@@ -2,12 +2,21 @@
 	<% @products.each do |product| %>
 		<div class="product-wrapper">
 			<div class="product-display">
-				<%= link_to image_tag(product.avatar.url(:thumb)), product_path(product) %>
+				<%= link_to image_tag(product.avatar.url(:thumb)), product_path(product) %><br/>
+				<b><%= product.product_name %></b>
 			</div>
 			<div class="product-description">
-				<b><%= product.product_name %></b><br/>
-				&#8377;<%= product.unit_price %><br/>
+				<% if product.discount > 0 %>
+					<del><span class="rupee">&#8377;</span>
+					<%= product.unit_price %></del>(<%=product.discount%>%)
+					<br/>
+					<span class="rupee">&#8377;</span>
+					<%= current_user.price_after_discount(product.unit_price.to_f,product.discount.to_f) %>
+					<br/>
+				<% else %>
+					<span class="rupee">&#8377;</span><%= product.unit_price %><br/>
+				<% end %>
 			</div>
 		</div>
-	<%end%>
+	<%end%><br>
 </div>

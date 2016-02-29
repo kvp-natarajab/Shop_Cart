@@ -1,6 +1,6 @@
 class Customer < ActiveRecord::Base
 	
-	def cart_count
+  	def cart_count
     	$redis.scard "cart#{id}"
   	end
 

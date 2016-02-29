@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
-	
-	
-	before_action :set_category, only: [:show, :edit, :update, :destroy]
+	load_and_authorize_resource
+	before_filter :authenticate_user!
+	# before_action :set_category, only: [:show, :edit, :update, :destroy]
 
 	def index
 		@category = Category.all
@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
 
 
 	def create
-		@category = Category.new(category_paramas)
+		# @category = Category.new(category_paramas)
 
 		respond_to do |format|
 			if @category.save

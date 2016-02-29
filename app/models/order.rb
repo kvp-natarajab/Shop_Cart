@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
-  belongs_to :customer
+  belongs_to :user
   belongs_to :shipper
-  has_many :order_details
+  has_many :order_details, :dependent => :destroy
   has_many :products, :through => :order_details
   
   # validates :order_date, presence: true

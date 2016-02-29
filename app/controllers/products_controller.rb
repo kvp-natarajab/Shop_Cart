@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-	# before_action :authenticate_seller!, only: [:create, :edit, :destroy, :update]
+	#load_and_authorize_resource
+	before_filter :authenticate_user!
 	before_action :set_product, only: [:show, :edit, :update, :destroy]
 
 	def index
@@ -10,9 +11,14 @@ class ProductsController < ApplicationController
 		@product = Product.new
 	end
 
-	def create
-		@product = Product.new(product_paramas)
+	def edit
+	end
 
+	def create
+
+		@product = Product.new(product_paramas)
+		@product.user_id = current_user.id
+		
 		respond_to do |format|
 			if @product.save
 				format.html { redirect_to @product, notice: "Product was successfully created." }
@@ -36,6 +42,14 @@ class ProductsController < ApplicationController
 		end
 	end
 
+	def destroy
+		@product.destroy
+    	respond_to do |format|
+      		format.html { redirect_to items_url, notice: 'Product was successfully destroyed.' }
+      		format.json { head :no_content }
+    	end
+	end
+
 	def show
 		  # @cart_action = @product.cart_action current_customer.try :id
 	end
@@ -56,7 +70,7 @@ class ProductsController < ApplicationController
 	end
 
 	def product_paramas
-		params.require(:product).permit(:product_name, :description, :unit_price, :total_unit, :unit_in_stock, :discount, :seller_id, :category_id, :subcategory_id, :brand_id, :avatar)
+		params.require(:product).permit(:product_name, :description, :unit_price, :total_unit, :unit_in_stock, :discount, :user_id, :category_id, :subcategory_id, :brand_id, :avatar)
 	end
 
 end

@@ -1,9 +1,10 @@
 class BrandsController < ApplicationController
-	
+	# load_and_authorize_resource
+	before_filter :authenticate_user!
 	before_action :set_brands, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@brand = Brand.all
+		# @brand = Brand.all
 	end
 
 	def new

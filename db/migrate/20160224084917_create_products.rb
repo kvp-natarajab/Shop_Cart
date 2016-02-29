@@ -7,7 +7,7 @@ class CreateProducts < ActiveRecord::Migration
       t.integer :total_unit
       t.integer :unit_in_stock
       t.integer :discount, length: { minimum:0, maximum: 100 }
-      t.references :seller, index: true, foreign_key: true
+      t.references :user, index: true, foreign_key: true
       t.references :category, index: true, foreign_key: true
       t.references :subcategory, index: true, foreign_key: true
       t.references :brand, index: true, foreign_key: true

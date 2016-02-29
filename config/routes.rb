@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
 
 
+  devise_for :users
+
+  resources :roles
+ 
   get 'carts/show'
 
-  devise_for :customers, controllers: { registrations: 'customers/registrations' }
-
-  devise_for :sellers, controllers: { registrations: 'sellers/registrations' }
+  # devise_for :users, controllers: { registrations: 'users/registrations' }
+  # scope "/admin" do
+  #   devise_for :users, controllers: { registrations: 'users/registrations' }
+  # end
 
   root :controller => 'home', :action => 'index'
   
@@ -29,7 +34,7 @@ Rails.application.routes.draw do
   get "/orders/new" => "orders#new"
   get "/products/search/:search_text" => "products#search", as: :search
   get "orders/show"
-
+  get "users/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

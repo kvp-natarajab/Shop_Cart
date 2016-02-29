@@ -1,8 +1,10 @@
 class SubcategoriesController < ApplicationController
-	before_action :set_subcategory, only: [:show, :edit, :update, :destroy]
+    load_and_authorize_resource
+	before_filter :authenticate_user!
+	# before_action :set_subcategory, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@subcategory = Subcategory.all
+		# @subcategory = Subcategory.all
 	end
 
 	def show

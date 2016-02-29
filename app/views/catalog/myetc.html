@@ -1,6 +1,38 @@
-<!-- 	<%= link_to image_tag(product.image_url(:thumb)), new_order_path(:product => product.id) %><br/> -->
+ *= require_tree .
+ *= require_self
+
+ application.scss
 
 
+ invoice_total = items.sum do |item|
+  item_total = (item.quantity * item.unit_price)
+  item_total.round(2)
+end
+
+invoice total
+
+<!-- 	<%= link_to image_tag(product.image_url(:thumb)), new_order_path(:product => product.id) %><br/> -->     <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Edit profile", edit_user_registration_path %>
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+  <% end %>
+
+<div class="field">
+    <%= f.label :role %><br>
+    <%= f.collection_select(:role_id, Role.all, :id, :name, {prompt: true}) %>
+  </div>
+
+ "#{current_user.seller_list}" Seeler list
+<div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id, value: current_user.id, :disabled => true  %>
+  </div>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
  <%if signed_in?%>
     <%=link_to "", class: "button", data: {target: @cart_action, addUrl: add_to_cart_path(@product), removeUrl: remove_from_cart_path(@product)} do%>
@@ -15,9 +47,18 @@
 
 
 
+================dynamic text
+<input name="" type="text" class="dist1" id="district">
+<% @cart_products.each do |cart_product| %>
+  <li>                    
+   <div class="districtname"><%= cart_product.product_name %></div>                        
+       
+  </li>                    
+<%end%>
 
+ <% quantity+=1 %>
 
-
+<%= text_field_tag(:q :id => "quantity[#{quantity}]")%>
 
 
   <!--  <input type="number" id="quantity<%=quantity%>"> -->

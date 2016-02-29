@@ -11,35 +11,44 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap
 //= require jquery_ujs
 //= require turbolinks
-//= require chosen-jquery
 //= require country_state_select
+//= require chosen-jquery
 //= require jquery-ui
 //= require_tree .
 
-$(function () {
-    var selectItem = function (event, ui) {
-        window.location.replace("/catalog/index?product_name="+ui.item.value);
-        return false;
-    }
-    $("#search_text").autocomplete({
-        source: function (request, response) {
-        	$.get(
-            "/products/search/"+request.term,
-            function (data) {
-            	response(data)
-            });
-    },
-        select: selectItem,
-        minLength: 1
-    });
-});
+
+$(document).ready(function() {
+	alert("hello");
+    // Setup - add a text input to each footer cell
+    $('#example tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#example').DataTable();
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+} );
 
 $(document).on('ready page:load', function() {
 return CountryStateSelect({
-	country_id: "seller_country",
-	state_id: "seller_state",
-	city_id: "seller_city",
+	country_id: "user_country",
+	state_id: "user_state",
+	city_id: "user_city",
 });
 });

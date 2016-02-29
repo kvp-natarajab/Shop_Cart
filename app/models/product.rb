@@ -1,7 +1,9 @@
 class Product < ActiveRecord::Base
+  
 
-  def cart_action(current_customer_id)
-    if $redis.sismember "cart#{current_customer_id}", id
+
+  def cart_action(current_user_id)
+    if $redis.sismember "cart#{current_user_id}", id
       "Remove from"
     else
       "Add to"
@@ -11,9 +13,9 @@ class Product < ActiveRecord::Base
  	belongs_to :category
   belongs_to :subcategory
   belongs_to :brand
-  belongs_to :seller
+  belongs_to :user
 
-  has_many :order_details
+  has_many :order_details, :dependent => :destroy
   has_many :orders, :through => :order_details
 
   validates :product_name, :description, :unit_price, :total_unit, presence: true

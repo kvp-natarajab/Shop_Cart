@@ -57,10 +57,7 @@
     <%= f.collection_select(:brand_id, Brand.all, :id, :name, { :prompt => "Select Brand" }, class:"form-control" ) %>
   </div>
 
-  <div class="field">
-    <%= f.label :seller_id %><br>
-    <%= f.collection_select(:seller_id, Seller.all, :id, :company_name, { :prompt => "Select Supplier"}, class:"form-control") %>
-  </div>
+  
   <div class="actions">
     <%= f.submit class:"btn btn-primary" %>
   </div>
