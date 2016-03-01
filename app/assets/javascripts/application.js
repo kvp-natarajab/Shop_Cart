@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+
 //= require bootstrap
 //= require jquery_ujs
 //= require turbolinks
@@ -20,35 +21,10 @@
 //= require_tree .
 
 
-$(document).ready(function() {
-	alert("hello");
-    // Setup - add a text input to each footer cell
-    $('#example tfoot th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    } );
- 
-    // DataTable
-    var table = $('#example').DataTable();
- 
-    // Apply the search
-    table.columns().every( function () {
-        var that = this;
- 
-        $( 'input', this.footer() ).on( 'keyup change', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
-} );
-
-$(document).on('ready page:load', function() {
-return CountryStateSelect({
-	country_id: "user_country",
-	state_id: "user_state",
-	city_id: "user_city",
-});
-});
+// $(document).on('ready page:load', function() {
+// return CountryStateSelect({
+// 	country_id: "user_country",
+// 	state_id: "user_state",
+// 	city_id: "user_city",
+// });
+// });

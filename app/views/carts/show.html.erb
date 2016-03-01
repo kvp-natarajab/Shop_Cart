@@ -1,17 +1,18 @@
 <div class="cart-container">
     <h2>Cart(<%= current_user.cart_count %>)</h2>
-    <% quantity = 0 %>
+    <%= form_tag("/orders/new", method: "get") do %>
         <table class="cart-table">
         <tr>
-            <td colspan=2>ITEM</td>
-            <td>QTY</td>
-            <td>PRICE</td>
-            <td>DELIVERY DETAILS</td>
-            <td>SUBTOTAL</td>
-            <td></td>
+            <th colspan=2>ITEM</th>
+            <th>QTY</th>
+            <th>PRICE</th>
+            <th>DELIVERY DETAILS</th>
+            <th>SUBTOTAL</th>
+            <th></th>
         </tr>
-        <% @cart_products.each do |cart_product| %>
-            <tr>
+        <% @cart_products.each_with_index do |cart_product, index| %>
+            <tr id="product-record-<%=index%>" data-index="<%=index%>">
+                <input type="hidden" name="product[<%=index%>]" id="product_<%=index%>" value="<%= cart_product.id %>"/>
                 <td>
                     <%= image_tag cart_product.avatar.url(:thumb) %>
                 </td>
@@ -19,32 +20,56 @@
                     <%= cart_product.description %>
                 </td>
                 <td>
-                    <input name="select" id="select[<%= cart_product.id %>]" type="text" class="gbutton" size="2"/>
+                    <input name="quantity[<%=index%>]" id="quantity_<%=index%>" type="text" class="gbutton" size="2" value="1"/>
                 </td>
                 <td>
+                    <input type="hidden" name="price[<%=index%>]" id="price_<%=index%>" value="<%= cart_product.unit_price %>"/>
                     &#8377;<%= cart_product.unit_price %>
                 </td>
                 <td>
                     Free.
                 </td>
                 <td>
-
+                    <span id="subtotal_<%=index%>"></span>
                 </td>
                 <td>
                 <%= link_to 'Remove', remove_from_cart_path(cart_product), method: :put, class:"btn btn-primary" %>
                 </td>
         <% end %>
-    </table>
+        </table>
+        <%= submit_tag("Place Order") %>
+    <% end %>
     <br/>
+        <b>Total</b> <span name="total" id="total"></span>
+    <br/><br/>
     <%= link_to '<Continue Shopping', catalog_index_path,{ class:"btns" }%>
-    <%= link_to 'Place Order',{:controller => 'orders', :action =>'new'},{ class:"btns" }%>
+   
    
    
 </div>
 
 <script type="text/javascript">
-	$(".gbutton").click(function(){
-        var getID = this.id.split("_");
-        alert(getID[1]);
-});
+$(document).ready(function(){
+    subtotal();
+    $(".gbutton").keyup(function(){
+        subtotal();
+    })
+
+}); 
+
+function subtotal(){
+    var subtotal = 0;
+    var quantity=0
+    var total=0
+    var price=0;
+    $("tr[id*='product-record-']").each(function(){
+        price = $("input[id*='price_"+$(this).attr("data-index")+"']").val();
+        quantity=$("input[id*='quantity_"+$(this).attr("data-index")+"']").val();
+        subtotal = Number(price) * Number(quantity);
+        $("span[id='subtotal_"+$(this).attr("data-index")+"']").html(subtotal)
+        total+=subtotal;
+    })
+    document.getElementById("total").innerHTML=total;
+}
+    
 </script>

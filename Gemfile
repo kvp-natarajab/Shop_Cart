@@ -23,10 +23,16 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'bootstrap-sass', '~> 3.3.6'
+
+gem 'omniauth-twitter'
+
+gem 'omniauth-facebook'
+
+gem "omniauth-google-oauth2"
 
 gem 'redis', '~> 3.0.1'
-# gem 'hiredis', '~> 0.4.5'
+
 gem 'redis-namespace'
 
 gem 'redis-rails'
@@ -42,9 +48,7 @@ gem 'devise'
 
 gem "paperclip"
 
-gem 'rmagick', '~>2.13'
 
-gem 'carrierwave'
 
 gem 'jquery-ui-rails'
 # Use ActiveModel has_secure_password

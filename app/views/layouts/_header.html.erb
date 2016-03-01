@@ -5,6 +5,7 @@
 			<a href="#"><img src="../assets/shopcart4.png"></a>
 			<ul class="nav navbar-nav pull-right">
 				<li><%= link_to "Home", root_path %></li>
+				<li><%= link_to 'Facebook', '/auth/facebook' %></li>
 				<li><%= link_to "Sign up", new_user_registration_path %></li>
 				<% if user_signed_in? %>
 					<% if current_user.customer? %>
@@ -53,21 +54,21 @@
 	</div>
 </header>
 <script>
-  $(function () {
-    var selectItem = function (event, ui) {
-        window.location.replace("/catalog/index?product_name="+ui.item.value);
-        return false;
-    }
-    $("#search_text").autocomplete({
-        source: function (request, response) {
-          $.get(
-            "/products/search/"+request.term,
-            function (data) {
-              response(data)
-            });
-    },
-        select: selectItem,
-        minLength: 1
-    });
-});
+//   $(function () {
+//     var selectItem = function (event, ui) {
+//         window.location.replace("/catalog/index?product_name="+ui.item.value);
+//         return false;
+//     }
+//     $("#search_text").autocomplete({
+//         source: function (request, response) {
+//           $.get(
+//             "/products/search/"+request.term,
+//             function (data) {
+//               response(data)
+//             });
+//     },
+//         select: selectItem,
+//         minLength: 1
+//     });
+// });
 </script>

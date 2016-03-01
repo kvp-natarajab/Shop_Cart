@@ -8,13 +8,13 @@
 			<div class="product-description">
 				<% if product.discount > 0 %>
 					<del><span class="rupee">&#8377;</span>
-					<%= product.unit_price %></del>(<%=product.discount%>%)
+					<%= product.unit_price.round %></del>(<%=product.discount%>%)
 					<br/>
 					<span class="rupee">&#8377;</span>
 					<%= current_user.price_after_discount(product.unit_price.to_f,product.discount.to_f) %>
 					<br/>
 				<% else %>
-					<span class="rupee">&#8377;</span><%= product.unit_price %><br/>
+					<span class="rupee">&#8377;</span><%= product.unit_price.round %><br/>
 				<% end %>
 			</div>
 		</div>

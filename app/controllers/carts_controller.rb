@@ -16,9 +16,4 @@ class CartsController < ApplicationController
     redirect_to cart_path
   end
 
-  private
-
-  def current_user_cart
-  	"cart#{current_user.id}"
-  end
 end

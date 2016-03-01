@@ -7,17 +7,17 @@ class User < ActiveRecord::Base
 	has_many :orders, :dependent => :destroy
 	has_many :products, :dependent => :destroy
 
-  def cart_count
-  	$redis.scard "cart#{id}"
+  	def cart_count
+  		$redis.scard "cart#{id}"
 	end
 
 	def order_number_gen(order_number)
-  	"%.5d" % order_number
+  		"%.5d" % order_number
 	end
 
-  def price_after_discount(unit_price,discount)
-   (unit_price-(unit_price * ((discount)/100))).round
-  end
+	def price_after_discount(unit_price,discount)
+     	(unit_price-(unit_price * ((discount)/100))).round
+  	end
 
 	def user_id
 		id

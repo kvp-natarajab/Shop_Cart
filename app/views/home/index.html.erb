@@ -2,38 +2,8 @@
 	<% if current_user.customer? %>
     <% end %>
      	<% if current_user.admin? %>
-     	<div class="wrapper">
-     		<div id="sidebar-wrapper">
-	            <ul class="sidebar-nav">
-	                <li class="sidebar-brand">
-	                   Admin Panel
-	                </li>
-	                <li>
-	                    <a href="#">Dashboard</a>
-	                </li>
-	                <li>
-	                    <%= link_to "User", users_index_path %>
-	                </li>
-	                <li>
-	                   <%= link_to "Product", products_path %>
-	                </li>
-	                <li>
-	                    <%= link_to "Category", categories_path %>
-	                </li>
-	                <li>
-	                   <%= link_to "Subcategory", subcategories_path %>
-	                </li>
-	                <li>
-	                   <%= link_to "Brand", brands_path %>
-	                </li>
-	                <li>
-	                    <a href="#">Contact</a>
-	                </li>
-	            </ul>
-        </div>
-        <%= render "layouts/alerts" %>
-        
-     <% end %>
+     		<%= render "layouts/adminpanel" %>
+     	<% end %>
      	<% if current_user.seller? %>
 			<h1>welcome seller </h1>
      <% end %>

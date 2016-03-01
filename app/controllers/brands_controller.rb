@@ -4,7 +4,7 @@ class BrandsController < ApplicationController
 	before_action :set_brands, only: [:show, :edit, :update, :destroy]
 
 	def index
-		# @brand = Brand.all
+		@brand = Brand.all
 	end
 
 	def new

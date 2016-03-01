@@ -1,3 +1,19 @@
+25c517a3bbcf63785e55e34fc2ff1752(appsecrete)
+1853407901552656(id)
+ <%= link_to 'Place Order',{:controller => 'orders', :action =>'new'},{ class:"btns", id: "place-order" }%>
+
+ params[:quanty].each{|key, val| puts val}
+
+
+<div class="magnify product-show-image">
+    <!-- <div class="large"><img class="small" src="<%= @product.avatar.url()%>"/></div> -->
+    <%= image_tag @product.avatar.url(:medium),{class:"small"} %> 
+  </div>
+
+  <script src="http://thecodeplayer.com/uploads/js/prefixfree.js" type="text/javascript"></script>
+
+<script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
  *= require_tree .
  *= require_self
 
