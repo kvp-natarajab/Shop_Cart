@@ -2,11 +2,14 @@
 	<div class="container">
 		<nav>
 			
-			<a href="#"><img src="../assets/shopcart4.png"></a>
+			<%= link_to image_tag("shopcart4.png"), root_path %>
+
 			<ul class="nav navbar-nav pull-right">
 				<li><%= link_to "Home", root_path %></li>
 				<li><%= link_to 'Facebook', '/auth/facebook' %></li>
-				<li><%= link_to "Sign up", new_user_registration_path %></li>
+				<% unless user_signed_in? %>
+					<li><%= link_to "Sign up", new_user_registration_path %></li>
+				<% end %>
 				<% if user_signed_in? %>
 					<% if current_user.customer? %>
 						<li class="dropdown">
@@ -22,10 +25,10 @@
 						</li>
 						<li>
 							<div class="search-container">
-							<form action="/products/search/" method="get">   
-                  				<input type="text" name="search_text" id="search_text">
-                    			<input type="submit" value="search">
-            				</form>
+								<%= form_tag(catalog_index_path, method: "get") do %>
+								  	<input type="text" name="search_text" data-autocomplete="application/autocomplete_product_product_name" class="search-text"/>
+								 	<%= submit_tag("Search") %>
+								<% end %>
             				</div>
 						</li>
 						<li>
@@ -56,7 +59,7 @@
 <script>
 //   $(function () {
 //     var selectItem = function (event, ui) {
-//         window.location.replace("/catalog/index?product_name="+ui.item.value);
+//         window.location.replace("/catalog/index?search_text="+ui.item.value);
 //         return false;
 //     }
 //     $("#search_text").autocomplete({

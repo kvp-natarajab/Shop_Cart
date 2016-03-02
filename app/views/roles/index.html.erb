@@ -1,13 +1,15 @@
 
 
-<h1>Listing Roles</h1>
+<h3>Listing Roles</h3>
 
-<table>
+<table id="roleTable">
   <thead>
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th colspan="3"></th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Destroy</th>
     </tr>
   </thead>
 
@@ -27,3 +29,8 @@
 <br>
 
 <%= link_to 'New Role', new_role_path %>
+<script>
+$(document).ready(function(){
+    $('#roleTable').DataTable();
+});
+</script>

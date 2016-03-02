@@ -10,8 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require chosen
- *= require jquery-ui
+
 
  */
 
@@ -20,15 +19,57 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
+.logo{
+    padding-top: 5px;
+}
+
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+}
+
+.ui-autocomplete{
+    z-index:1031;
+}
+.slide-container{
+    width:800px;
+    padding-top:50px;
+    margin:0 auto;
+}
+
+.form-container{
+    width:400px;
+    margin:0 auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-form{
+    margin-top:10px;
+    padding:5px;
+    text-align:center;
+    width:400px;
+}
 .page-content-wrapper{
     padding:10px;
-    text-align:center;
 }
-tfoot input {
-        width: 100%;
-        padding: 3px;
-        box-sizing: border-box;
-    }
+
 .search-container{
     width:350px;
     padding-top:10px;
@@ -221,13 +262,6 @@ tfoot input {
     border-bottom: 1px solid #c9c9c9;
 }
 
-.button{
-    text-decoration:none;
-    width:200px;
-    height:150px;
-    background-color:black;
-    color:#fff;
-}
 
 .product-show-image{
     float:left;
@@ -253,28 +287,3 @@ tfoot input {
     border: 1px solid #ec6723;
     color: #f9f9f9;
 }
-
-/*===============*/
-
-.magnify {width: 200px; margin: 50px auto; position: relative;}
-
-/*Lets create the magnifying glass*/
-.large {
-    width: 175px; height: 175px;
-    position: absolute;
-    border-radius: 100%;
-    
-    /*Multiple box shadows to achieve the glass effect*/
-    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 
-    0 0 7px 7px rgba(0, 0, 0, 0.25), 
-    inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
-    
-    /*Lets load up the large image first*/
-    
-    
-    /*hide the glass by default*/
-    display: none;
-}
-
-/*To solve overlap bug at the edges during magnification*/
-.small { display: block; }

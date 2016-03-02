@@ -1,16 +1,33 @@
-<table class="display-table">
+<h3>Subcategory Deatails</h3>
+<table id="subcategoryTable">
+	<thead>
 	<tr>
 		<th>Sub Category Name</th>
 		<th>Description</th>
 		<th>Category</th>
+		<th>Show</th>
+		<th>Edit</th>
+		<th>Destroy</th>
 	</tr>
-	<% @subcategory.each do |subcat| %>
-	<tr>
-		<td><%= subcat.name %></td>
-		<td><%= subcat.description %></td>
-		<td><%= subcat.category.name %></td>
-	</tr>
-	<% end %>
+	</thead>
+	<tbody>
+		<% @subcategory.each do |subcat| %>
+		<tr>
+			<td><%= subcat.name %></td>
+			<td><%= subcat.description %></td>
+			<td><%= subcat.category.name %></td>
+			<td><%= link_to 'Show', subcat %></td>
+			<td><%= link_to 'Edit', edit_subcategory_path(subcat)%></td>
+			<td><%= link_to 'Delete', subcat, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %></td>
+		</tr>
+		<% end %>
+	</tbody>
 </table>
 
-<%= link_to 'Add New Product', new_product_path %>
+<%= link_to 'Add New Subcategory', new_subcategory_path %>
+
+<script>
+$(document).ready(function(){
+    $('#subcategoryTable').DataTable();
+});
+</script>

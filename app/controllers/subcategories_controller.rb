@@ -1,7 +1,11 @@
 class SubcategoriesController < ApplicationController
-    load_and_authorize_resource
+    # load_and_authorize_resource
 	before_filter :authenticate_user!
-	# before_action :set_subcategory, only: [:show, :edit, :update, :destroy]
+
+	layout :choose_layout
+	
+	before_action :set_subcategory, only: [:show, :edit, :update, :destroy]
+
 
 	def index
 		@subcategory = Subcategory.all
@@ -50,6 +54,19 @@ class SubcategoriesController < ApplicationController
 		end
 	end
 
+
+	protected
+
+	def choose_layout
+		if current_user.admin?
+			"admin"
+		elsif current_user.seller?
+			"seller"
+		else
+			"application"
+		end
+	end
+	
 	private
 
 	def set_subcategory

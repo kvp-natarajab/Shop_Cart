@@ -11,20 +11,22 @@
 // about supported directives.
 //
 //= require jquery
-
 //= require bootstrap
+
+//= require jquery-ui
 //= require jquery_ujs
 //= require turbolinks
-//= require country_state_select
 //= require chosen-jquery
-//= require jquery-ui
+//= require country_state_select
+//= require autocomplete-rails
+
 //= require_tree .
 
 
-// $(document).on('ready page:load', function() {
-// return CountryStateSelect({
-// 	country_id: "user_country",
-// 	state_id: "user_state",
-// 	city_id: "user_city",
-// });
-// });
+$(document).on('ready page:load', function() {
+return CountryStateSelect({
+	country_id: "user_country",
+	state_id: "user_state",
+	city_id: "user_city",
+});
+});

@@ -1,21 +1,15 @@
 class RolesController < ApplicationController
   before_filter :authenticate_user!
   # before_action :set_role, only: [:show, :edit, :update, :destroy]
-   load_and_authorize_resource
+  load_and_authorize_resource
+  layout :choose_layout
 
   def index
     @roles = Role.all
   end
 
-
   def show
-    if @role.users.length == 0
-      @assosciated_users = "None"
-    else
-      @assosciated_users = @role.users.map(&:name).join(", ")
-    end
   end
-
 
   def new
     @role = Role.new

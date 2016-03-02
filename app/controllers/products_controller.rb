@@ -3,8 +3,14 @@ class ProductsController < ApplicationController
 	before_filter :authenticate_user!
 	before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+	layout :choose_layout
+
 	def index
-		 @product = Product.all
+		if current_user.seller?
+			@product = Product.where(id:current_user.id)
+		else
+		 	@product = Product.all
+		end
 	end
 
 	def new
@@ -50,23 +56,17 @@ class ProductsController < ApplicationController
     	end
 	end
 
-	def show
-		  # @cart_action = @product.cart_action current_customer.try :id
-	end
 
 	def search
-		@products = Product.select(:product_name,).where('product_name LIKE ?', "#{params[:search_text]}%")
+		@products = Product.select(:product_name,).where('lower(product_name) LIKE ?', "#{params[:search_text].downcase}%")
 		render json: @products.map(&:product_name)	
 	end
+	
 
 	private
 
 	def set_product
-		if params[:search_text]
-			@products = Product.where('product_name LIKE ?', "#{params[:search_text]}%")
-		else
-			@product = Product.find(params[:id])
-		end
+		@product = Product.find(params[:id])
 	end
 
 	def product_paramas

@@ -1,36 +1,20 @@
 Rails.application.routes.draw do
-
-
   devise_for :users
-
+  get "application/autocomplete_product_product_name" => 'application#autocomplete_product_product_name'
   resources :roles
- 
   get 'carts/show'
-
-  # devise_for :users, controllers: { registrations: 'users/registrations' }
-  # scope "/admin" do
-  #   devise_for :users, controllers: { registrations: 'users/registrations' }
-  # end
-
   root :controller => 'home', :action => 'index'
-  
   get 'catalog/index'
- 
+  get 'auth/:provider/callback' => 'users#create'
   resources :products
   resources :brands
   resources :categories
   resources :subcategories
-  # resources :orders
   resources :shippers
-
   resource :cart, only: [:show] do
     put 'add/:product_id', to: 'carts#add', as: :add_to
     put 'remove/:product_id', to: 'carts#remove', as: :remove_from
   end
-  # resource :cart, only: [:show] do
-  #   put 'add/:product_id', to: 'carts#add', as: :add_to
-  #   put 'add/:product_id', to: 'carts#remove', as: :remove_from
-  # end
   get "/orders/new" => "orders#new"
   get "/products/search/:search_text" => "products#search", as: :search
   get "orders/show"

@@ -22,7 +22,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+# shopcart-1237
 gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'omniauth-twitter'
@@ -32,6 +32,8 @@ gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 
 gem 'redis', '~> 3.0.1'
+
+gem 'rails4-autocomplete'
 
 gem 'redis-namespace'
 

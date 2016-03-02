@@ -20,7 +20,7 @@
                     <%= cart_product.description %>
                 </td>
                 <td>
-                    <input name="quantity[<%=index%>]" id="quantity_<%=index%>" type="text" class="gbutton" size="2" value="1"/>
+                    <input name="quantity[<%=index%>]" id="quantity_<%=index%>" type="text" class="change_subtotal" size="2" value="1"/>
                 </td>
                 <td>
                     <input type="hidden" name="price[<%=index%>]" id="price_<%=index%>" value="<%= cart_product.unit_price %>"/>
@@ -51,7 +51,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
     subtotal();
-    $(".gbutton").keyup(function(){
+    $(".change_subtotal").keyup(function(){
         subtotal();
     })
 

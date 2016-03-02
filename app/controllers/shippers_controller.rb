@@ -1,5 +1,5 @@
 class ShippersController < ApplicationController
-	
+	layout :choose_layout
 	before_action :set_shipper, only: [:show, :edit, :upadte, :destroy]
 
 	def index

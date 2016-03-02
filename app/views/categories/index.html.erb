@@ -1,9 +1,14 @@
-<table class="display-table">
+<table id="categoryTable">
+	<thead>
 	<tr>
 		<th>Category name</th>
 		<th>Description</th>
-		<th>
+		<th>Show</th>
+		<th>Edit</th>
+		<th>Destroy</th>
 	</tr>
+	</thead>
+	<tbody>
 	<% @category.each do |cat| %>
 	<tr>
 		<td><%= cat.name %></td>
@@ -13,4 +18,10 @@
 		<td><%= link_to 'Delete', cat, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %></td>
 	</tr>
 	<% end %>
+	</tbody>
 </table>
+<script>
+$(document).ready(function(){
+    $('#categoryTable').DataTable();
+});
+</script>

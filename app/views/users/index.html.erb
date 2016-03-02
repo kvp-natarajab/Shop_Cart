@@ -1,48 +1,37 @@
+<h3>User Deatails</h3>
+<table id="userTable">
+<thead>
+	<tr>
+		<th> User ID </th>
+		<th> Name </th>
+		<th> Role </th>
+		<th> Phone </th>
+		<th> Email </th>
+		<th> address </th>
+		<th> city </th>
+		<th> state </th>
+		<th> country </th>
+		<th colspan="3"></th>
+	</tr>
+</thead>
+<tbody>
+<% @users.each do |user| %>
+	<tr>
+		<td><%= user.id %></td>
+		<td><%= user.name %></td>
+		<td><%= user.role.name %></td>
+		<td><%= user.phone %></td>
+		<td><%= user.email %></td>
+		<td><%= user.address %></td>
+		<td><%= user.city %></td>
+		<td><%= user.state %></td>
+		<td><%= user.country %></td>
+	</tr>
+<% end %>
+</tbody>
+</table>
+<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show/Hide Panel</a>
 
-<%= render 'layouts/adminpanel' %>
-
-<div class="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-               <table id="userTable" class="display" width="100%" cellpadding="0" border="1">
-				<thead>
-					<tr>
-						<th> User ID </th>
-						<th> Name </th>
-						<th> Role </th>
-						<th> Phone </th>
-						<th> Email </th>
-						<th> address </th>
-						<th> city </th>
-						<th> state </th>
-						<th> country </th>
-						<th colspan="3"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<% @users.each do |user| %>
-					<tr>
-						<td><%= user.id %></td>
-						<td><%= user.name %></td>
-						<td><%= user.role.name %></td>
-						<td><%= user.phone %></td>
-						<td><%= user.email %></td>
-						<td><%= user.address %></td>
-						<td><%= user.city %></td>
-						<td><%= user.state %></td>
-						<td><%= user.country %></td>
-					</tr>
-				<% end %>
-				</tbody>
-				</table>
-				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show/Hide Panel</a>
-			</div>
-
-        </div>
-    </div>
-
-</div>
 
 <script>
 $(document).ready(function(){

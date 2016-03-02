@@ -1,7 +1,18 @@
+<form action="/products/search/" method="get">   
+                          <input type="text" name="search_text" id="search_text">
+                          <input type="submit" value="search">
+                    </form>
+
 25c517a3bbcf63785e55e34fc2ff1752(appsecrete)
 1853407901552656(id)
  <%= link_to 'Place Order',{:controller => 'orders', :action =>'new'},{ class:"btns", id: "place-order" }%>
-
+.button{
+    text-decoration:none;
+    width:200px;
+    height:150px;
+    background-color:black;
+    color:#fff;
+}
  params[:quanty].each{|key, val| puts val}
 
 
