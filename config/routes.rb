@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+
   get "application/autocomplete_product_product_name" => 'application#autocomplete_product_product_name'
   resources :roles
   get 'carts/show'
@@ -18,7 +19,9 @@ Rails.application.routes.draw do
   get "/orders/new" => "orders#new"
   get "/products/search/:search_text" => "products#search", as: :search
   get "orders/show"
-  get "users/index"
+  resources :users
+  resources :order_details
+  # get "users/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

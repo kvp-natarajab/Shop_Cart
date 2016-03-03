@@ -1,3 +1,21 @@
+<div class="order-search-container">
+	<div class="heading-container">
+		<span class="head">Brand Details</span>
+	</div>
+	<div class="search-container">
+		<div class="search-oder-wrapper">
+			<input type="text" id="myInputTextField" placeholder="Search">
+		</div>
+		<div class="total-order-wrapper">
+			<p class="total-amount-p">
+				<% if can? :create, Brand %>
+  					<%= link_to 'New Brand', new_brand_path %>
+				<% end %>
+			</p>
+		</div>
+	</div>
+</div>
+
 
 <table id="brandTable">
 	<thead>
@@ -17,8 +35,16 @@
 			<td><%= brand.description %></td>
 			<td><%= brand.subcategory.name %></td>
 			<td><%= link_to 'Show', brand %></td>
-			<td><%= link_to 'Edit', edit_brand_path(brand)%></td>
-			<td><%= link_to 'Delete', brand, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %></td>
+			<td>
+				<% if can? :update, Brand %>
+					<%= link_to 'Edit', edit_brand_path(brand)%>
+				<% end %>
+			</td>
+			<td>
+				<% if can? :destroy, Brand %>
+					<%= link_to 'Delete', brand, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %>
+				<% end %>
+			</td>
 		</tr>
 		<% end %>
 	</tbody>
@@ -26,6 +52,12 @@
 
 <script>
 $(document).ready(function(){
-    $('#brandTable').DataTable();
+	oTable = $('#brandTable').DataTable( {
+    	"sDom": '<"top"i>rt<"bottom"flp><"clear">'
+  	});   
+	$('#myInputTextField').keyup(function(){
+      oTable.search($(this).val()).draw() ;
+      total();
+	});
 });
 </script>

@@ -1,6 +1,22 @@
+<div class="order-search-container">
+  <div class="heading-container">
+    <span class="head">Product Details</span>
+  </div>
+  <div class="search-container">
+    <div class="search-oder-wrapper">
+      <input type="text" id="myInputTextField" placeholder="Search">
+    </div>
+    <div class="total-order-wrapper">
+      <p class="total-amount-p">
+        <% if can? :create, Product %>
+          <%= link_to 'New Product', new_product_path %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
 
-  <h1 class="h1">Listing Products</h1>
-  <table id="productTable">
+<table id="productTable">
     <thead>
           <tr>
             <th> Product ID </th>
@@ -13,6 +29,7 @@
             <th> Unit in Stock </th>
             <th> Brand </th>
             <th> Seller </th>
+            <th> Show </th>
             <th>Edit/Delete</th>
           </tr>
     </thead>
@@ -29,12 +46,13 @@
         <td><%= product.unit_in_stock %></td>
         <td><%= product.brand.name %></td>
         <td></td>
+        <td><%= link_to 'Show', product_path(product) %></td>
         <td>
-          <% if can? :update, product %>
+          <% if can? :update, Product %>
             <%= link_to 'Edit', edit_product_path(product) %>
           <% end %>
         |
-          <% if can? :destroy, product %>
+          <% if can? :destroy, Product %>
              <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
         </td>
@@ -43,13 +61,16 @@
   </tbody>
 </table>
 
-<br/>
-<% if can? :create, Product %>
-  <%= link_to 'New Product', new_product_path %>
-<% end %>
+
             
 <script>
 $(document).ready(function(){
-    $('#productTable').DataTable();
+    oTable = $('#productTable').DataTable( {
+      "sDom": '<"top"i>rt<"bottom"flp><"clear">'
+    });   
+  $('#myInputTextField').keyup(function(){
+      oTable.search($(this).val()).draw() ;
+      total();
+  });
 });
 </script>

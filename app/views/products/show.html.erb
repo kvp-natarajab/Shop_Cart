@@ -5,11 +5,14 @@
 		<%= image_tag @product.avatar.url(:medium)%>
 	</div>
 	<div class="product-show-description">
+		<%= @product.description %>
 		<%= @product.product_name %><br/>
 		<h4>&#8377;<%= @product.unit_price %></h4>
 	</div>
 	<% if current_user.customer? %>
 		<%= link_to "Add to cart", add_to_cart_path(:product_id => @product.id), method: :put, class:"btn btn-primary" %>
+	<% elsif current_user.seller? or current_user.admin? %>
+		<%= link_to "Back to Products", products_path, class:"btn btn-primary" %>
 	<% end %>
 </div>
 

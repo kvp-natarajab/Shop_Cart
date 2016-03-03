@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 	end
 
 	def order_number_gen(order_number)
-  		"%.5d" % order_number
+  		"1%.5d" % order_number
 	end
 
 	def price_after_discount(unit_price,discount)
@@ -24,24 +24,21 @@ class User < ActiveRecord::Base
 		id
 	end
 
-	def assign_role
-  	self.role = Role.find_by name: "Customer" if self.role.nil?
-	end
-
 	def admin?
-		self.role.name == "Admin"
+	    self.role.name == "Admin"
 	end
 
 	def seller?
-  		self.role.name == "Seller"
+	    self.role.name == "Seller"
+	end
+	  
+	def customer?
+	    self.role.name == "Customer"
 	end
   
-	def customer?
-  		self.role.name == "Customer"
-	end
 
 	def seller_list
     	User.where(:role_id => role_id).map{|u| [u.id,u.name]}
-  end
+  	end
  
 end

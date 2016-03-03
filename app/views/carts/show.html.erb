@@ -1,5 +1,14 @@
 <div class="cart-container">
-    <h2>Cart(<%= current_user.cart_count %>)</h2>
+<div class="order-search-container">
+    <div class="search-container">
+        <div class="total-order-wrapper">
+            <p class="total-amount-p">
+                Total(&#8377;): <span id="total"></span>
+            </p>
+        </div>
+    </div>
+</div>
+    
     <%= form_tag("/orders/new", method: "get") do %>
         <table class="cart-table">
         <tr>
@@ -37,15 +46,11 @@
                 </td>
         <% end %>
         </table>
-        <%= submit_tag("Place Order") %>
+        <%= link_to '<Continue Shopping', catalog_index_path(:category_id => @cart_products.last.category_id),{ class:"btns" }%>
+        <%= submit_tag("Place Order",:class=>"btns") %>
+
     <% end %>
-    <br/>
-        <b>Total</b> <span name="total" id="total"></span>
-    <br/><br/>
-    <%= link_to '<Continue Shopping', catalog_index_path,{ class:"btns" }%>
-   
-   
-   
+    
 </div>
 
 <script type="text/javascript">
@@ -53,7 +58,7 @@ $(document).ready(function(){
     subtotal();
     $(".change_subtotal").keyup(function(){
         subtotal();
-    })
+    });
 
 }); 
 

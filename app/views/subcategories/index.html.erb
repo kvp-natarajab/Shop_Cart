@@ -1,4 +1,20 @@
-<h3>Subcategory Deatails</h3>
+<div class="order-search-container">
+  <div class="heading-container">
+    <span class="head">Subcategory Details</span>
+  </div>
+  <div class="search-container">
+    <div class="search-oder-wrapper">
+      <input type="text" id="myInputTextField" placeholder="Search">
+    </div>
+    <div class="total-order-wrapper">
+      <p class="total-amount-p">
+        <% if can? :create, Subcategory %>
+ 			 <%= link_to 'New Subcategory', new_subcategory_path %>
+		<% end %>
+      </p>
+    </div>
+  </div>
+</div>
 <table id="subcategoryTable">
 	<thead>
 	<tr>
@@ -17,17 +33,28 @@
 			<td><%= subcat.description %></td>
 			<td><%= subcat.category.name %></td>
 			<td><%= link_to 'Show', subcat %></td>
-			<td><%= link_to 'Edit', edit_subcategory_path(subcat)%></td>
-			<td><%= link_to 'Delete', subcat, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %></td>
+			<td>
+				<% if can? :update, Subcategory %>
+  					<%= link_to 'Edit', edit_subcategory_path(subcat)%>
+				<% end %>
+			</td>
+			<td>
+				<% if can? :destroy, Subcategory %>
+					<%= link_to 'Delete', subcat, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %>
+				<% end %>
+			</td>
 		</tr>
 		<% end %>
 	</tbody>
 </table>
-
-<%= link_to 'Add New Subcategory', new_subcategory_path %>
-
 <script>
 $(document).ready(function(){
-    $('#subcategoryTable').DataTable();
+	oTable = $('#subcategoryTable').DataTable( {
+      "sDom": '<"top"i>rt<"bottom"flp><"clear">'
+    });   
+	$('#myInputTextField').keyup(function(){
+	      oTable.search($(this).val()).draw() ;
+	      total();
+	});
 });
 </script>

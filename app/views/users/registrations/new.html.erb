@@ -1,4 +1,4 @@
-
+<div class="form-container">
             <h2>Sign up</h2>
 
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -31,7 +31,7 @@
             </div>
 
            <%= f.select :country, CountryStateSelect.countries_collection %>
-          <% options = { form: f, field_names: { :country => :country, :state => :state } } %>
+          <% options={form:f,field_names:{:country => :country, :state => :state } } %>
         <%= f.select :state, CountryStateSelect.state_options(options) %>
       <%= f.text_field :city %>
 
@@ -53,4 +53,4 @@
           <% end %>
 
           <%= render "users/shared/links" %>
-
+</div>

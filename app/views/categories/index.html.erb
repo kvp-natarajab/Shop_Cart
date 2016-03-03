@@ -1,3 +1,20 @@
+<div class="order-search-container">
+  <div class="heading-container">
+    <span class="head">Subcategory Details</span>
+  </div>
+  <div class="search-container">
+    <div class="search-oder-wrapper">
+      <input type="text" id="myInputTextField" placeholder="Search">
+    </div>
+    <div class="total-order-wrapper">
+      <p class="total-amount-p">
+        <% if can? :create, Category %>
+  			<%= link_to 'New category', new_category_path %>
+		<% end %>
+      </p>
+    </div>
+  </div>
+</div>
 <table id="categoryTable">
 	<thead>
 	<tr>
@@ -14,14 +31,28 @@
 		<td><%= cat.name %></td>
 		<td><%= cat.description %></td>
 		<td><%= link_to 'Show', cat %></td>
-		<td><%= link_to 'Edit', edit_category_path(cat)%></td>
-		<td><%= link_to 'Delete', cat, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %></td>
+		<td>
+			<% if can? :update, Category %>
+				<%= link_to 'Edit', edit_category_path(cat)%>
+			<% end %>
+		</td>
+		<td>
+			<% if can? :destroy, Category %>
+				<%= link_to 'Delete', cat, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %>
+			<% end %>
+		</td>
 	</tr>
 	<% end %>
 	</tbody>
 </table>
 <script>
 $(document).ready(function(){
-    $('#categoryTable').DataTable();
+	oTable = $('#categoryTable').DataTable( {
+      "sDom": '<"top"i>rt<"bottom"flp><"clear">'
+    });   
+	$('#myInputTextField').keyup(function(){
+	      oTable.search($(this).val()).draw() ;
+	      total();
+	});
 });
 </script>

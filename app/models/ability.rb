@@ -7,7 +7,10 @@ class Ability
     if user.admin?
         can :manage, :all
     elsif user.seller?
-        can :read, Product
+        can :index, Category
+        can :index, Subcategory
+        can :index, Brand
+        can :index, Product
         can :create, Product
         can :update, Product do |product|
             product.try(:user) == user
@@ -16,10 +19,10 @@ class Ability
             product.try(:user) == user
         end
     elsif user.customer?
-        can :read, Product
-        can :read, Category
-        can :read, Subcategory
-        can :read, Brand
+        can :index, Product
+        can :index, Category
+        can :index, Subcategory
+        can :index, Brand
     end
 
     # Define abilities for the passed in user here. For example:

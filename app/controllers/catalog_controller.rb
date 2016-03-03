@@ -6,6 +6,8 @@ class CatalogController < ApplicationController
 		elsif params[:id]
 			@category = Category.find(params[:id])
 			@products = Product.where(:category_id => @category.id)
+		elsif params[:category_id]
+			@products = Product.where(:category_id => params[:category_id])
 		end
 			
 	end

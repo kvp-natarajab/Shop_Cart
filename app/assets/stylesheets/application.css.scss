@@ -19,8 +19,38 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
+body{
+    font-family: Helvetica,FreeSans,"Liberation Sans",Helmet,Arial,sans-serif;
+}
+.dataTables_filter { visibility: hidden;}
 .logo{
     padding-top: 5px;
+}
+.login-container-fluid{
+    margin-top:100px;
+}
+.login-container{
+    border-radius:3px;
+    width:400px;
+    margin:0 auto; 
+    background-color:#2980b9;   
+}
+.login-wrapper{
+    padding:10px;
+}
+.login-wrapper a{
+    color:#fff;
+}
+.search-text{
+    width:260px;
+    height:30px;
+}
+.btn-login{
+    width:380px;
+}
+.login-wrapper h3{
+    text-align:center;
+    color:#fff;
 }
 
 .carousel-inner > .item > img,
@@ -34,7 +64,7 @@
 }
 .slide-container{
     width:800px;
-    padding-top:50px;
+    padding-top:60px;
     margin:0 auto;
 }
 
@@ -46,11 +76,13 @@
 table {
     border-collapse: collapse;
     width: 100%;
+    border:4px solid black;
 }
 
 th, td {
     text-align: left;
     padding: 8px;
+    border:1px solid black;
 }
 
 tr:nth-child(even){background-color: #f2f2f2}
@@ -286,4 +318,40 @@ th {
     background: #f75b16;
     border: 1px solid #ec6723;
     color: #f9f9f9;
+}
+.head{
+    font-size: 18px;
+    font-weight:200px;
+}
+.order-search-container{
+    width:100%;
+    height:auto;
+    border:1px solid black;
+    text-align:center;
+}
+#myInputTextField{
+    padding-left:5px;
+    width: 250px;
+    height: 30px;
+}
+.total-amount-p{
+    font-size: 16px;
+    padding-top:5px;
+    margin:0px;
+}
+.heading-container{
+    width:100%;
+    padding:5px;
+}
+.search-container{
+    width:100%;
+    height:auto;
+    padding:5px;
+}
+.search-oder-wrapper{
+    padding:5px;
+    float:left;
+}
+.total-order-wrapper{
+    float:right;
 }

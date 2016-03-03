@@ -12,18 +12,16 @@
 //
 //= require jquery
 //= require bootstrap
-
-//= require jquery-ui
-//= require jquery_ujs
 //= require turbolinks
 //= require chosen-jquery
 //= require country_state_select
+//= require jquery_ujs
 //= require autocomplete-rails
-
+//= require jquery-ui
 //= require_tree .
-
-
+ 	
 $(document).on('ready page:load', function() {
+
 return CountryStateSelect({
 	country_id: "user_country",
 	state_id: "user_state",

@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
 
 	def index
 		if current_user.seller?
-			@product = Product.where(id:current_user.id)
+			@product = Product.where(user_id:current_user.id)
 		else
 		 	@product = Product.all
 		end
@@ -21,10 +21,8 @@ class ProductsController < ApplicationController
 	end
 
 	def create
-
 		@product = Product.new(product_paramas)
 		@product.user_id = current_user.id
-		
 		respond_to do |format|
 			if @product.save
 				format.html { redirect_to @product, notice: "Product was successfully created." }
@@ -51,7 +49,7 @@ class ProductsController < ApplicationController
 	def destroy
 		@product.destroy
     	respond_to do |format|
-      		format.html { redirect_to items_url, notice: 'Product was successfully destroyed.' }
+      		format.html { redirect_to products_path, notice: 'Product was successfully destroyed.' }
       		format.json { head :no_content }
     	end
 	end

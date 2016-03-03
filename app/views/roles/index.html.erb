@@ -1,6 +1,21 @@
+<div class="order-search-container">
+  <div class="heading-container">
+    <span class="head">Listing Roles</span>
+  </div>
+  <div class="search-container">
+    <div class="search-oder-wrapper">
+      <input type="text" id="myInputTextField" placeholder="Search">
+    </div>
+    <div class="total-order-wrapper">
+      <p class="total-amount-p">
+        <% if can? :create, Role %>
+          <%= link_to 'New Role', new_role_path %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
 
-
-<h3>Listing Roles</h3>
 
 <table id="roleTable">
   <thead>
@@ -19,18 +34,28 @@
         <td><%= role.name %></td>
         <td><%= role.description %></td>
         <td><%= link_to 'Show', role %></td>
-        <td><%= link_to 'Edit', edit_role_path(role) %></td>
-        <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+            <% if can? :update, role %>
+                <%= link_to 'Edit', edit_role_path(role) %>
+            <% end %>
+        </td>
+        <td>
+          <% if can? :destroy, role %>
+            <%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Role', new_role_path %>
 <script>
 $(document).ready(function(){
-    $('#roleTable').DataTable();
+    oTable = $('#roleTable').DataTable( {
+      "sDom": '<"top"i>rt<"bottom"flp><"clear">'
+    });   
+    $('#myInputTextField').keyup(function(){
+        oTable.search($(this).val()).draw() ;
+        total();
+    });
 });
 </script>

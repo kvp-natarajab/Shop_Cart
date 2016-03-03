@@ -1,4 +1,13 @@
-<h3>User Deatails</h3>
+<div class="order-search-container">
+  <div class="heading-container">
+    <span class="head">User Deatail</span>
+  </div>
+  <div class="search-container">
+    <div class="search-oder-wrapper">
+      <input type="text" id="myInputTextField" placeholder="Search">
+    </div>
+  </div>
+</div>
 <table id="userTable">
 <thead>
 	<tr>
@@ -11,7 +20,8 @@
 		<th> city </th>
 		<th> state </th>
 		<th> country </th>
-		<th colspan="3"></th>
+		<th> Edit </th>
+		<th> Destroy </th>
 	</tr>
 </thead>
 <tbody>
@@ -26,6 +36,12 @@
 		<td><%= user.city %></td>
 		<td><%= user.state %></td>
 		<td><%= user.country %></td>
+		<td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
+		<td>
+			<% if can? :destroy, user %>
+				<%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+			<% end %>
+		</td>
 	</tr>
 <% end %>
 </tbody>
@@ -35,6 +51,12 @@
 
 <script>
 $(document).ready(function(){
-    $('#userTable').DataTable();
+	oTable = $('#userTable').DataTable( {
+      "sDom": '<"top"i>rt<"bottom"flp><"clear">'
+    });   
+	$('#myInputTextField').keyup(function(){
+	      oTable.search($(this).val()).draw() ;
+	      total();
+	});
 });
 </script>
