@@ -1,8 +1,12 @@
 <div class="login-container-fluid">
 	<div class="login-container">
 		<div class="login-wrapper">
-			<h3>Welcome Back!..Log in</h3>
 
+			<h3>Welcome Back!..Log in</h3>
+			<div class="social-container">
+		        <%= link_to 'Twitter', '/auth/twitter' %>
+		       	<%= link_to 'Facebook', '/auth/facebook' %>
+      		</div>
 			<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 				<div class="field">
 				<%= f.label :email %>

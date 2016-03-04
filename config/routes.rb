@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {sessions: 'users/sessions'}
 
   get "application/autocomplete_product_product_name" => 'application#autocomplete_product_product_name'
   resources :roles
   get 'carts/show'
   root :controller => 'home', :action => 'index'
   get 'catalog/index'
-  # get '/auth/:provider/callback', to: 'sessions#create'
+  get '/auth/:provider/callback', to: 'sessions#create'
   resources :products
   resources :brands
   resources :categories

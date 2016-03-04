@@ -1,18 +1,30 @@
+<div class="login-container-fluid">
+	<div class="login-container">
+		<div class="login-wrapper">
 
-<h3>Welcome Back! Please Sign In</h3>
+			<h3>Welcome Back!..Log in</h3>
+			<div class="social-container">
+		        <%= link_to 'Twitter', '/auth/twitter' %>
+		       	<%= link_to 'Facebook', '/auth/facebook' %>
+      		</div>
+			<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+				<div class="field">
+				<%= f.label :email %>
+				<%= f.email_field :email, required: false, autofocus: true,class:"form-control" %>
+				</div>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)}) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true, class="form-control" %>
-    <%= f.input :password, required: false, class="form-control" %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
+				<div class="field">
+					<%= f.label :password %>
+				<%= f.password_field :password, required: false,class:"form-control" %>
+				<%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+				</div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in",{class:"btn btn-lg btn-primary btn-block"} %>
-  </div>
-<% end %>
+				<div class="form-actions">
+				<%= f.button(:submit,"Log in", {class:"btn btn-login" }) %>
+				</div>
+				<% end %>
 
-<%= render "users/shared/links" %>
-
-
+			<%= render "users/shared/links" %>
+		</div>
+	</div>
+</div>

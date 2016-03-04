@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   has_many :order_details, :dependent => :destroy
   has_many :products, :through => :order_details
   
-  # validates :order_date, presence: true
+  validates :order_date, presence: true
   # validate :shipped__date_cannot_be_in_the_past
 
   def shipped__date_cannot_be_in_the_past

@@ -1,15 +1,4 @@
 class Product < ActiveRecord::Base
-  
-
-
-  def cart_action(current_user_id)
-    if $redis.sismember "cart#{current_user_id}", id
-      "Remove from"
-    else
-      "Add to"
-    end
-  end
-
  	belongs_to :category
   belongs_to :subcategory
   belongs_to :brand
@@ -25,7 +14,7 @@ class Product < ActiveRecord::Base
   validate  :unit_in_stock_cannot_be_greater_than_total_unit
 
   def unit_in_stock_cannot_be_greater_than_total_unit
-  	if unit_in_stock > total_unit
+  	if unit_in_stock.to_i > total_unit.to_i
   		errors.add(:unit_in_stock, "can't be greater than total unit")
   	end
   end

@@ -6,7 +6,6 @@
 
 			<ul class="nav navbar-nav pull-right">
 				<li><%= link_to "Home", root_path %></li>
-				<li><%= link_to 'Facebook', '/auth/facebook' %></li>
 				<% unless user_signed_in? %>
 					<li><%= link_to "Sign up", new_user_registration_path %></li>
 				<% end %>
