@@ -33,6 +33,32 @@ ActiveRecord::Schema.define(version: 20160303030218) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string   "name",                   limit: 100
+    t.string   "phone",                  limit: 14
+    t.text     "address"
+    t.string   "landmark",               limit: 100
+    t.string   "city",                   limit: 80
+    t.string   "state",                  limit: 80
+    t.string   "country",                limit: 80
+    t.integer  "pincode",                limit: 8
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
+  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
+
   create_table "order_details", force: :cascade do |t|
     t.integer  "order_number"
     t.integer  "quantity"
@@ -100,6 +126,32 @@ ActiveRecord::Schema.define(version: 20160303030218) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "sellers", force: :cascade do |t|
+    t.string   "company_name",           limit: 50
+    t.text     "address"
+    t.string   "phone",                  limit: 14
+    t.string   "city",                   limit: 80
+    t.string   "state",                  limit: 80
+    t.string   "country",                limit: 80
+    t.integer  "pincode",                limit: 8
+    t.boolean  "status"
+    t.string   "email",                             default: "", null: false
+    t.string   "encrypted_password",                default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                     default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  add_index "sellers", ["email"], name: "index_sellers_on_email", unique: true, using: :btree
+  add_index "sellers", ["reset_password_token"], name: "index_sellers_on_reset_password_token", unique: true, using: :btree
 
   create_table "shippers", force: :cascade do |t|
     t.string   "compnay_name"
