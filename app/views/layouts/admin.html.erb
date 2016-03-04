@@ -3,69 +3,67 @@
 <head>
   <title>Mycart</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+ <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" type="text/css">
  <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-  <div class="container-fluid">
+<div class="container-fluid">
       <%= render "layouts/header" %>
       <div id="wrapper">
 
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                   Admin Dashboard
-                </li>
-        
-                <li>
-                    <%= link_to "User", users_path %>
-                </li>
-                <li>
-                   <%= link_to "Product", products_path %>
-                </li>
-                <li>
-                <%= link_to "Order Detail", order_details_path %>
-                </li>
-                <li>
-                    <%= link_to "Category", categories_path %>
-                </li>
-                <li>
-                   <%= link_to "Subcategory", subcategories_path %>
-                </li>
-                <li>
-                   <%= link_to "Brand", brands_path %>
-                </li>
-                <li>
-                    <%= link_to "Role", roles_path %>
-                </li>
-                <li>
-                    <%= link_to "Shipper", shippers_path %>
-                </li>
-            </ul>
-        </div>
-    </div>
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                       Admin Dashboard
+                    </li>
+            
+                    <li>
+                        <%= link_to "User", users_path %>
+                    </li>
+                    <li>
+                       <%= link_to "Product", products_path %>
+                    </li>
+                    <li>
+                    <%= link_to "Order Detail", order_details_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Category", categories_path %>
+                    </li>
+                    <li>
+                       <%= link_to "Subcategory", subcategories_path %>
+                    </li>
+                    <li>
+                       <%= link_to "Brand", brands_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Role", roles_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Shipper", shippers_path %>
+                    </li>
+                </ul>
+          </div>
     
-<div class="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <p id="notice"><%= notice %></p>
-                 <%= yield %>     
-            </div>
-
-        </div>
-
-    </div>
-</div>     
+          <div class="page-content-wrapper">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <p id="notice"><%= notice %></p>
+                           <%= yield %>     
+                      </div>
+                  </div>
+              </div>
+          </div>     
+  </div>
 </div>
-</body>
-</html>
-  
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
     </script>
+</body>
+</html>
+  

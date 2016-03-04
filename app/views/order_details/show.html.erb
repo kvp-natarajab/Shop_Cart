@@ -1,0 +1,52 @@
+<% @total = 0 %>
+<table>
+<tbody>
+	<tr>
+		<td colspan=4>
+			<b>Customer Address:</b><br/>
+			<%= @user.name %><br/>
+			<%= @user.address %><br/>
+			<%= @user.city %><br/>
+			<b>Land Mark:</b> <%= @user.landmark %><br/>
+			<b>State :</b> <%= @user.state %><br/>
+			<b>Pincode:</b><%= @user.pincode %>
+		</td>
+		<td colspan=2>
+			<b>Order Number:</b><%= @order.ordernumber %><br/>
+			<b>Date:</b><%= @order.order_date %>
+		</td>
+	</tr>
+	<tr>
+		<th>Product Name</th>
+		<th> Description</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		<th> Discount</th>
+		<th>Subtotal</th>
+	</tr>
+	<% @subtotal = 0 %>
+<% @orderdetails.each_with_index do |order_detail| %> 
+	<% price = order_detail.unit_price %> 
+	<tr>
+		<td><%= order_detail.product_name %></td>
+		<td><%= order_detail.description %></td>
+		<td><%= order_detail.quantity %></td>
+		<td><%= price %></td>
+		<td><%= order_detail.discount %>(%)</td>
+		<td>
+			<b>
+			<%= @subtotal = OrderDetail.new.subtotal(order_detail.quantity,order_detail.discount.to_f,price.to_f) %>
+			</b>
+			<% @total += @subtotal %>
+		</td>
+
+	</tr>
+<% end %>
+	<tr>
+		<td colspan=5></td>
+		<td>
+			<b>Total(&#8377;):</b> <%= @total %>
+		</td>
+	</tr>
+</tbody>
+</table>

@@ -9,8 +9,9 @@
     <div class="total-order-wrapper">
       <p class="total-amount-p">
         <% if can? :create, Product %>
-          <%= link_to 'New Product', new_product_path %>
+          <%= link_to 'New Product', new_product_path,{class:"btn btn-default"} %>
         <% end %>
+        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show/Hide Panel</a>
       </p>
     </div>
   </div>
@@ -45,7 +46,7 @@
         <td><%= product.unit_price %></td>
         <td><%= product.unit_in_stock %></td>
         <td><%= product.brand.name %></td>
-        <td></td>
+        <td><%= product.user.name if product.user_id.present? %></td>
         <td><%= link_to 'Show', product_path(product) %></td>
         <td>
           <% if can? :update, Product %>
@@ -70,7 +71,6 @@ $(document).ready(function(){
     });   
   $('#myInputTextField').keyup(function(){
       oTable.search($(this).val()).draw() ;
-      total();
   });
 });
 </script>

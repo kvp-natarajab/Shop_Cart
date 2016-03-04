@@ -7,9 +7,9 @@ class ProductsController < ApplicationController
 
 	def index
 		if current_user.seller?
-			@product = Product.where(user_id:current_user.id)
+			@product = Product.where(user_id:current_user.id).order(created_at: :asc)
 		else
-		 	@product = Product.all
+		 	@product = Product.all.order(created_at: :asc)
 		end
 	end
 

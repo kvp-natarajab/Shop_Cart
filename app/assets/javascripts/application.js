@@ -10,21 +10,12 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require bootstrap
+//= require jquery
 //= require turbolinks
+//= require jquery_ujs
 //= require chosen-jquery
 //= require country_state_select
-//= require jquery_ujs
 //= require autocomplete-rails
-//= require jquery-ui
 //= require_tree .
- 	
-$(document).on('ready page:load', function() {
-
-return CountryStateSelect({
-	country_id: "user_country",
-	state_id: "user_state",
-	city_id: "user_city",
-});
-});
+		

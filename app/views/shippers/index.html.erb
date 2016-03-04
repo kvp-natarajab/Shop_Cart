@@ -9,8 +9,9 @@
     <div class="total-order-wrapper">
       <p class="total-amount-p">
         <% if can? :create, Shipper %>
-          <%= link_to 'New shipper', new_shipper_path %>
+          <%= link_to 'New shipper', new_shipper_path,{class:"btn btn-default"} %>
         <% end %>
+        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show/Hide Panel</a>
       </p>
     </div>
   </div>
@@ -46,7 +47,6 @@ $(document).ready(function(){
     });   
     $('#myInputTextField').keyup(function(){
         oTable.search($(this).val()).draw() ;
-        total();
     });
 });
 </script>

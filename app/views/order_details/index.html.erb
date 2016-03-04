@@ -8,6 +8,7 @@
 		</div>
 		<div class="total-order-wrapper">
 			<p class="total-amount-p"><b>Total Sum(&#8377;):</b> <span id="total"></span></p>
+			<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show/Hide Panel</a>
 		</div>
 	</div>
 </div>
@@ -16,13 +17,13 @@
 <thead>
 	<tr>
 		<th> ID </th>
-		<th> Odr ID</th>
 		<th> Odr Number </th>
 		<th> Product </th>
 		<th> Quantity </th>
 		<th> Price </th>
 		<th> Discount </th>
 		<th> Order Date</th>
+		<th> Seller </th>
 		<th> Subtotal</th>
 		<th> show </th>
 		<th> Edit </th>
@@ -30,24 +31,24 @@
 	</tr>
 </thead>
 <tbody>
-<% @orderdetails.each_with_index do |order_detail, index| %>
-	<% price = order_detail.product.unit_price %> 
+<% @orderdetails.each_with_index do |order_detail, index| %> 
+	<% price = order_detail.unit_price %> 
 	<tr id="order-record-<%=index%>" data-index="<%=index%>">
 		<td><%= order_detail.id %></td>
-		<td><%= order_detail.order_id  %></td>
 		<td><%= order_detail.order_number %></td>
-		<td><%= order_detail.product.product_name %></td>
+		<td><%= order_detail.product_name %></td>
 		<td><%= order_detail.quantity %></td>
 		<td><%= price %></td>
 		<td><%= order_detail.discount%>%</td>
-		<td><%= order_detail.order.order_date %></td>
-		<td id="subtotal_<%=index%>"><b>
-		
-			<%= order_detail.subtotal(order_detail.quantity,order_detail.discount.to_f,price.to_f) %>
-		</b>
+		<td><%= order_detail.order_date %></td>
+		<td><%= order_detail.name %></td>
+		<td id="subtotal_<%=index%>">
+			<b>
+			<%= OrderDetail.new.subtotal(order_detail.quantity,order_detail.discount.to_f,price.to_f) %>
+			</b>
 		</td>
-		<td>show</td>
-		<td><%= link_to 'Edit', edit_user_registration_path(order_detail) %></td>
+		<td><%= link_to 'Show', order_detail_path(order_detail.order_number) %></td>
+		<td></td>
 		<td>
 			<% if can? :destroy, OrderDetail %>
 				<%= link_to 'Destroy', order_detail, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -57,7 +58,6 @@
 <% end %>
 </tbody>
 </table>
-<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show/Hide Panel</a>
 <script>
 $(document).ready(function(){
 	total();
@@ -68,16 +68,14 @@ $(document).ready(function(){
       oTable.search($(this).val()).draw() ;
       total();
 	});
-
 });
 
 function total(){
 	 var subtotal = 0;
 	 var total=0;
 	 $("tr[id*='order-record-']").each(function(){
-	 	subtotal = $("td[id*='subtotal_"+$(this).attr("data-index")+"']").text();
-	 	total+=Number(subtotal);
+	 	total+= Number($("td[id*='subtotal_"+$(this).attr("data-index")+"']").text());
 	 });
-	 document.getElementById("total").innerHTML=total;
+	 document.getElementById("total").innerHTML=Number(total);
 }
 </script>

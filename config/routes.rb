@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'carts/show'
   root :controller => 'home', :action => 'index'
   get 'catalog/index'
-  get 'auth/:provider/callback' => 'users#create'
+  # get '/auth/:provider/callback', to: 'sessions#create'
   resources :products
   resources :brands
   resources :categories

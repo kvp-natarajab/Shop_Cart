@@ -18,6 +18,9 @@ class Ability
         can :destroy, Product do |product|
             product.try(:user) == user
         end
+        can :destroy, OrderDetail do |order_detail|
+            order_detail.try(:user) == user
+        end
     elsif user.customer?
         can :index, Product
         can :index, Category
