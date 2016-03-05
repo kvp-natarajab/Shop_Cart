@@ -12,9 +12,9 @@ r3 = Role.create({name: "Admin", description: "Can perform any CRUD operation on
 
 u1 = User.create({name: "raj", landmark:"Near forum Mall", phone:"7795179882", address:"Adugodi", city:"Bangalore", state:"Karnataka", country:"India", email: "seller@gmail.com", password: "12345678", password_confirmation: "12345678", role_id: r2.id}) 
 u2 = User.create({name: "raj", landmark:"Near forum Mall", phone:"7795179882", address:"Adugodi", city:"Bangalore", state:"Karnataka", country:"India", email: "customer@gmail.com", password: "12345678", password_confirmation: "12345678", role_id: r1.id}) 
-u3 = User.create({name: "raj", landmark:"Near forum Mall", phone:"7795179882", address:"Adugodi", city:"Bangalore", state:"Karnataka", country:"India", email: "admin@example.com", password: "12345678", password_confirmation: "12345678", role_id: r3.id}) 
+u3 = User.create({name: "raj", email: "admin@example.com", password: "12345678", password_confirmation: "12345678", role_id: r3.id}) 
 u4 = User.create({name: "raj", landmark:"Near forum Mall", phone:"7795179882", address:"Adugodi", city:"Bangalore", state:"Karnataka", country:"India", email: "admin@gmail.com", password: "12345678", password_confirmation: "12345678", role_id: r3.id}) 
 
-# u4 = User.find_or_create_by({name: "raj", phone: "8792226597", address:"Kasaragod", email: "nataraja.b@kvpcorp.com", password: "12345678", password_confirmation: "12345678", role_id: r1.id})
+# u5 = User.find_or_create_by({name: "raj", phone: "8792226597", address:"Kasaragod", email: "nataraja.b@kvpcorp.com", password: "12345678", password_confirmation: "12345678", role_id: r1.id})
 
 
