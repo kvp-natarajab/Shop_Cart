@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
   protected
 
 	def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << [:name,:role_id, :phone, :address, :land_mark, :city, :state, :country, :pincode ]
-    devise_parameter_sanitizer.for(:account_update) << [:name, :role_id, :phone, :address, :land_mark, :city, :state, :country, :pincode ]
+    devise_parameter_sanitizer.for(:sign_up) << [:name,:role_id, :phone, :address, :landmark, :city, :state, :country, :pincode ]
+    devise_parameter_sanitizer.for(:account_update) << [:name, :role_id, :phone, :address, :landmark, :city, :state, :country, :pincode ]
   end
 
   # def assign_role

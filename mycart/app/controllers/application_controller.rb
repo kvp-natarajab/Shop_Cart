@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 	    devise_parameter_sanitizer.for(:sign_up) do |user_params|
 	    
 	    	if resource_class == Customer
-	    		user_params.permit(:name, :email, :phone, :password, :password_confirmation, :address, :land_mark, :city, :state, :country, :pincode, :remember_me)
+	    		user_params.permit(:name, :email, :phone, :password, :password_confirmation, :address, :landmark, :city, :state, :country, :pincode, :remember_me)
 	    	elsif resource_class == Seller
 	    		user_params.permit(:company_name, :phone, :address, :password, :password_confirmation, :email, :city, :state, :country, :pincode, :status, :remember_me)
 	    	end

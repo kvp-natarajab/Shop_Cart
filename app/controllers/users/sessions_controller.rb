@@ -1,7 +1,7 @@
 class Users::SessionsController < Devise::SessionsController
-  def create
-    render text: request.env['omniauth.auth'].to_yaml
-  end
+  # def create
+  #   render text: request.env['omniauth.auth'].to_yaml
+  # end
 # before_filter :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
