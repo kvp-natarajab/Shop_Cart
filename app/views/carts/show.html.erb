@@ -19,6 +19,7 @@
             <th>SUBTOTAL</th>
             <th></th>
         </tr>
+        <% @cart_cat_id = @cart_products.last %>
         <% @cart_products.each_with_index do |cart_product, index| %>
             <tr id="product-record-<%=index%>" data-index="<%=index%>">
                 <input type="hidden" name="product[<%=index%>]" id="product_<%=index%>" value="<%= cart_product.id %>"/>
@@ -46,7 +47,8 @@
                 </td>
         <% end %>
         </table>
-        <%= link_to '<Continue Shopping', catalog_index_path(:category_id => @cart_products.last.category_id),{ class:"btns" }%>
+        <% raise @cart_cat_id.inspect %>
+        <%= link_to '<Continue Shopping', catalog_index_path(@cart_cat_id),{ class:"btns" }%>
         <%= submit_tag("Place Order",:class=>"btns") %>
 
     <% end %>

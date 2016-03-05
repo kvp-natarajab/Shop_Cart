@@ -16,6 +16,7 @@
 /*
  *= require jquery-ui
  */
+
 @import "chosen";
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -24,6 +25,7 @@
 body{
     font-family: Helvetica,FreeSans,"Liberation Sans",Helmet,Arial,sans-serif;
 }
+
 .dataTables_filter { visibility: hidden;}
 .logo{
     padding-top: 5px;
@@ -357,4 +359,12 @@ th {
 }
 .total-order-wrapper{
     float:right;
+}
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  position: relative;
+  margin-left: 0px;
+  margin-top: 4px \9;
 }

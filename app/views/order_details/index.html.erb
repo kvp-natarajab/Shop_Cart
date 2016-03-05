@@ -47,7 +47,7 @@
 			<%= OrderDetail.new.subtotal(order_detail.quantity,order_detail.discount.to_f,price.to_f) %>
 			</b>
 		</td>
-		<td><%= link_to 'Show', order_detail_path(order_detail.order_number) %></td>
+		<td><%= link_to 'Show Bill', order_detail_path(order_detail.order_number) %></td>
 		<td></td>
 		<td>
 			<% if can? :destroy, OrderDetail %>
