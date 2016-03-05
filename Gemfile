@@ -44,14 +44,8 @@ gem 'redis-rack-cache'
 gem 'cancancan', '~> 1.10'
 
 gem 'country_state_select', '~> 3.0', '>= 3.0.1'
-
 gem 'devise'
-
-
 gem "paperclip"
-
-
-
 gem 'jquery-ui-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
