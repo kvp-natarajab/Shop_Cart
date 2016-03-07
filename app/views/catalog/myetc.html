@@ -4,7 +4,7 @@
       <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
     </div>
 
-
+ <%= link_to '<Continue Shopping', catalog_index_path(:category_id=>@cart_cat_id),{ class:"btns" }%>
 <form action="/products/search/" method="get">   
                           <input type="text" name="search_text" id="search_text">
                           <input type="submit" value="search">

@@ -1,84 +1,162 @@
-<div class="form-container">
-  <div class="form-wrapper">
-      <h2>Sign up</h2>
+<style type="text/css">
+.error {
+    color: red;
+}
+</style>
+<div class="form-register-container">
+  <div class="form-register-wrapper">
+        <h2>Sign up</h2>
+        <p>Note: After successfull registration a confirmation mail is send to your mail </p>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => { :id => "signupForm"}) do |f| %>
+                  <% if resource.errors.any? %>
+                  <div id="error_explanation">
+                    <h4><%= pluralize(resource.errors.count, "error") %> Their are some error occured when saving details:</h4>
 
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= f.error_notification %>
-
-                  <div class="field">
-                    <%= f.label :name %><br>
-                    <%= f.text_field :name,  required: true, autofocus: true, class:"form-control" %>
+                    <ul>
+                      <% resource.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
                   </div>
+                <% end %>
+                      <div class="form form-wrapper-left">
 
-                <div class="field">
-                    <%= f.label :role_id %><br>
-                    <%= f.collection_select(:role_id,Role.where.not(name:"Admin"), :id, :name,{ prompt:"Select Role"}) %>
-                  </div>
-                  
-                  <div class="field">
-                    <%= f.label :email %>
-                    <%= f.email_field :email, required: true, autofocus: true,class:"form-control" %>
-                  </div>
+                          <div class="field">
+                              <%= f.label :name %><br>
+                              <%= f.text_field :name, autofocus: true, class:"form-control" %>
+                          </div>
 
-                  <div class="field">
-                    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-                  </div>
+                          <div class="field">
+                              <%= f.label :role_id %><br>
+                               <%= f.collection_radio_buttons :role_id, [['1', 'Customer'] ,['2', 'Seller'],['3', 'Admin']],:first, :last %> 
+                            </div>
+                            
+                            <div class="field">
+                              <%= f.label :email %>
+                              <%= f.email_field :email, autofocus: true,class:"form-control" %>
+                            </div>
 
-                  <div class="field">
-                   <%= f.input :password_confirmation, required: true, class:"form-control" %>
-                  </div>
+                            <div class="field">
+                               <%= f.label :password %>
+                              <%= f.password_field :password, class:"form-control", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+                            </div>
 
-                  <div class="field">
-                    <%= f.label :phone %><br>
-                    <%= f.text_field :phone,  required: true, autofocus: true, class:"form-control" %>
-                  </div>
+                            <div class="field">
+                             <%= f.label :password_confirmation %>
+                             <%= f.password_field :password_confirmation, class:"form-control" %>
+                            </div>
 
+                            <div class="field">
+                              <%= f.label :phone %><br>
+                              <%= f.text_field :phone, autofocus: true, class:"form-control" %>
+                            </div>         
+      
+            </div>
+            <div class="form form-wrapper-right">
                   <div class="field">
                     <%= f.label :address %><br>
-                    <%= f.text_area :address,  required: true, autofocus: true, class:"form-control" %>
+                    <%= f.text_area :address, autofocus: true, class:"form-control" %>
                   </div>
 
                   <div class="field">
                     <%= f.label :landmark %><br>
-                    <%= f.text_field :landmark,  required: true, autofocus: true, class:"form-control" %>
+                    <%= f.text_field :landmark, autofocus: true, class:"form-control" %>
                   </div>
                   <div class="field">
                     <%= f.label :country %><br>
-                    <%= f.select :country, CountryStateSelect.countries_collection %>
+                    <%= f.text_field :country, autofocus: true, class:"form-control" %>
                   </div>
                 
                   <div class="field">
                     <%= f.label :state %><br>
-                    <% options={form:f,field_names:{:country => :country, :state => :state } } %>
-                    <%= f.select :state, CountryStateSelect.state_options(options) %>
+                    <%= f.text_field :state, autofocus: true, class:"form-control" %>
                   </div>
                
-                <div class="field">
+                  <div class="field">
                     <%= f.label :city %><br>
-                    <%= f.text_field :city %>
+                    <%= f.text_field :city, class:"form-control"  %>
                   </div>
            
-                <div class="field">
-                    <%= f.label :pincode %><br />
-                    <%= f.number_field :pincode, autofocus: true, class:"form-control" %>
-                </div>
-      
-
-        <div class="form-actions">
-          <%= f.button :submit, "Sign up" %>
-        </div>
+                  <div class="field">
+                      <%= f.label :pincode %><br />
+                      <%= f.number_field :pincode, autofocus: true, class:"form-control" %>
+                  </div>
+          </div>
+          </div>
+              <div class="form-actions">
+                  <%= f.submit "Sign up",class:"btn btn-primary btn-form" %>
+              </div>   
       <% end %>
   </div>
+
 </div>
 
-<%= render "users/shared/links" %>
+
 <script type="text/javascript">
-$(document).on('ready page:load', function() {
-  
-return CountryStateSelect({
-  country_id: "user_country",
-  state_id: "user_state",
-  city_id: "user_city",
-});
-});
+$(document).ready(function() {
+      $("#signupForm").validate({
+        rules: {
+          "user[name]":{
+            required:true
+          },
+          "user[email]": {
+            required: true,
+            email: true
+          },
+          "user[password]":{
+            required:true,
+            minlength: 8
+          },
+          "user[phone]":{
+            required: true
+          },
+          "user[password_confirmation]":{
+            required:true,
+            minlength: 8
+          },
+          "user[address]":{
+            required:true
+          },
+          "user[pincode]":{
+            required: true
+          },
+          "user[landmark]":{
+            required: true,
+            minlength: 3
+          },
+          "user[city]":{
+            required:true
+          },
+           "user[state]":{
+            required:true
+          }
+          
+        },
+
+        messages: {
+          "user[name]":"Please enter your name",
+          "user[email]":"Please enter your email",
+          "user[password]":"Please enter your password",
+          "user[password_confirmation]":"Please confirm your password",
+          "user[phone]":"Please enter your phone number",
+          "user[address]":"Please enter your address",
+          "user[pincode]":"Please enter pincode",
+          "user[landmark]":"Please enter landmark",
+          "user[city]":"Please enter city",
+          "user[state]":"Please enter state"
+        },
+        highlight: function (element) {
+            $(element).addClass('error')
+        },
+        unhighlight: function (element) {
+            $(element).removeClass('error')
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+        
+        });
+
+ });
+
 </script>

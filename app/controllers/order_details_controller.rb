@@ -12,5 +12,16 @@ class OrderDetailsController < ApplicationController
 		@order = Order.find_by(:ordernumber=>params[:id])
 		@user = User.find_by(id: @order.user_id)
 		@orderdetails = OrderDetail.joins(:product).where(:order_number=>params[:id]).select('products.*,order_details.*')
+		
+		respond_to do |format|
+      		format.html
+      		format.pdf do
+	        pdf = InvoicePdf.new(@orderdetails,@user,@order, view_context)
+	        send_data pdf.render, filename: 
+	        "invoice_#{params[:id]}.pdf",
+	        type: "application/pdf", disposition: "inline"
+      end
+    end
+
 	end
 end

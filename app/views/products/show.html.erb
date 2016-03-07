@@ -1,18 +1,28 @@
- 
+ <script src='..\assets\jquery.elevateZoom-3.0.8.min.js'></script>
 <div class="product-show-container">
 
 	<div class="product-show-image">
-		<%= image_tag @product.avatar.url(:medium)%>
+		<img id="zoom_01" src='<%=@product.avatar.url(:small)%>' data-zoom-image="<%= @product.avatar.url(:medium) %>"/>
 	</div>
 	<div class="product-show-description">
-		<%= @product.description %>
-		<%= @product.product_name %><br/>
+		<%= @product.description %><br/>
+		<b><%= @product.product_name %></b><br/>
 		<h4>&#8377;<%= @product.unit_price %></h4>
 	</div>
+	
 	<% if current_user.customer? %>
 		<%= link_to "Add to cart", add_to_cart_path(:product_id => @product.id), method: :put, class:"btn btn-primary" %>
 	<% elsif current_user.seller? or current_user.admin? %>
 		<%= link_to "Back to Products", products_path, class:"btn btn-primary" %>
 	<% end %>
 </div>
+
+<script>
+//     $('#zoom_01').elevateZoom({
+//     zoomType: "inner",
+// cursor: "crosshair",
+// zoomWindowFadeIn: 500,
+// zoomWindowFadeOut: 750
+//    }); 
+</script>
 

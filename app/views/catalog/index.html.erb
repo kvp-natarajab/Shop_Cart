@@ -1,22 +1,37 @@
+
 <div class="product-container">
-	<% @products.each do |product| %>
-		<div class="product-wrapper">
-			<div class="product-display">
-				<%= link_to image_tag(product.avatar.url(:thumb)), product_path(product) %><br/>
-				<b><%= product.product_name %></b>
+	<div class="catalog-sidebar">
+		<p>Browse By Sub category</p>
+		<% if params[:id] or params[:search_text] %>
+			<% @subcategories=Subcategory.where(category_id: params[:id]) %>
+				<% @subcategories.each do |subcategory| %>
+		  		<%= link_to subcategory.name, catalog_index_path(:sub_cat_id => subcategory.id) %></a><br/> 
+		  		<% end %>
+		<% end %>
+	</div>
+	<div class="product-bar">
+		<% if @products.empty? %>
+			No products found
+		<% end %>
+		<% @products.each do |product| %>
+			<div class="product-wrapper">
+				<div class="product-display">
+					<%= link_to image_tag(product.avatar.url(:thumb)), product_path(product) %><br/>
+					<b><%= product.product_name %></b>
+				</div>
+				<div class="product-description">
+					<% if product.discount > 0 %>
+						<del><span class="rupee">&#8377;</span>
+						<%= product.unit_price.round %></del>(<%=product.discount%>%)
+						<br/>
+						<span class="rupee">&#8377;</span>
+						<%= current_user.price_after_discount(product.unit_price.to_f,product.discount.to_f) %>
+						<br/>
+					<% else %>
+						<span class="rupee">&#8377;</span><%= product.unit_price.round %><br/>
+					<% end %>
+				</div>
 			</div>
-			<div class="product-description">
-				<% if product.discount > 0 %>
-					<del><span class="rupee">&#8377;</span>
-					<%= product.unit_price.round %></del>(<%=product.discount%>%)
-					<br/>
-					<span class="rupee">&#8377;</span>
-					<%= current_user.price_after_discount(product.unit_price.to_f,product.discount.to_f) %>
-					<br/>
-				<% else %>
-					<span class="rupee">&#8377;</span><%= product.unit_price.round %><br/>
-				<% end %>
-			</div>
-		</div>
-	<%end%><br>
+		<%end%><br>
+	</div>
 </div>

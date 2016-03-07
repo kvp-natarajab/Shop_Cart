@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-
-  load_and_authorize_resource
+  before_action :user_param, only: [:show, :edit, :update, :destroy]
   layout :choose_layout
  
   def index
@@ -45,6 +44,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if successfully_updated
+        sign_in(@user == current_user ? @user : current_user, :bypass => true)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -63,6 +63,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def finish_signup 
+    if request.patch? && params[:user] #&& params[:user][:email]
+      if @user.update(user_params)
+        @user.skip_reconfirmation!
+        sign_in(@user, :bypass => true)
+        redirect_to @user, notice: 'Your profile was successfully updated.'
+      else
+        @show_errors = true
+      end
+    end
+  end
+
   private
     def needs_password?(user, params)
       params[:password].present?
@@ -70,6 +82,8 @@ class UsersController < ApplicationController
 
    
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id, :landmark, :phone, :address, :city, :state, :country, :pincode)
+      accessible = [ :name, :email, :password, :password_confirmation, :role_id, :landmark, :phone, :address, :city, :state, :country, :pincode ] 
+      accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+      params.require(:user).permit(accessible)
     end
 end

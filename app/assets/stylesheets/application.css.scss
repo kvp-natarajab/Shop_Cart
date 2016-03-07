@@ -25,8 +25,8 @@
 body{
     font-family: Helvetica,FreeSans,"Liberation Sans",Helmet,Arial,sans-serif;
 }
-
 .dataTables_filter { visibility: hidden;}
+
 .logo{
     padding-top: 5px;
 }
@@ -75,10 +75,7 @@ body{
     margin:0 auto;
 }
 
-.form-container{
-    width:400px;
-    margin:0 auto;
-}
+
 
 table {
     border-collapse: collapse;
@@ -265,10 +262,14 @@ th {
 
 .product-container{
     margin:0 auto;
-    width:800px;
-    padding-top:80px;
-        
+    width:900px;
+    padding-top:80px;      
 }
+
+.product-bar{
+    width:900px;
+}
+
 .product-wrapper{
     width:190px;
     float:left;
@@ -368,3 +369,39 @@ th {
   margin-left: 0px;
   margin-top: 4px \9;
 }
+.form-register-container{
+    width:900px;
+    margin:0 auto;
+    height:300px;
+    padding-top:50px;
+    clear: both;
+}
+.form-register-wrapper{
+    
+}
+.form{
+    width:430px;
+    height:auto;
+    padding:20px;
+    border-radius:5px;  
+}
+.form-wrapper-left{
+    float:left;
+}
+.form-wrapper-right{
+    float: right;
+}
+.form-product-container{
+    padding-top:50px;
+    clear: both;
+}
+
+
+
+
+
+
+
+
+
+

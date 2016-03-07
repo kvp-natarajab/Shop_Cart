@@ -25,12 +25,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # shopcart-1237
 gem 'bootstrap-sass', '~> 3.3.6'
 
-gem 'omniauth-twitter'
-
-gem 'omniauth-facebook'
-
-gem "omniauth-google-oauth2"
-
 gem 'redis', '~> 3.0.1'
 
 gem 'rails4-autocomplete'
@@ -43,10 +37,27 @@ gem 'redis-rack-cache'
 
 gem 'cancancan', '~> 1.10'
 
+gem 'prawn'
+
+gem 'prawn-table'
+
 gem 'country_state_select', '~> 3.0', '>= 3.0.1'
+
 gem 'devise'
+
 gem "paperclip"
+
 gem 'jquery-ui-rails'
+
+gem 'omniauth'
+
+gem 'omniauth-twitter'
+
+gem 'omniauth-facebook'
+
+gem 'jquery-validation-rails'
+# //= require jquery.validate
+# //= require jquery.validate.additional-methods
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
