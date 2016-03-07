@@ -265,6 +265,6 @@ Devise.setup do |config|
   
   config.omniauth :facebook, "1853407901552656", "25c517a3bbcf63785e55e34fc2ff1752"
   config.omniauth :twitter, "E2CeqeAkaWXTlpCepyIkkviIc", "W4kFa5pWQrqFetOX1JrvYGguXc4kh64S0sLQEXPzI3yg0RfTWY"
-
+  config.secret_key = 'f6878c683049415069b13b544b1bea1ea7e3f5fc5009bf600ad4b5e3d02b60c499bb1326a8a6f2b58a7b3ea15d3b8e4eb4ce02c479a23af1117c3cfb39b8f2b6'
 
 end
