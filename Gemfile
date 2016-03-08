@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.4'
+ruby '2.1.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -51,13 +51,10 @@ gem 'jquery-ui-rails'
 
 gem 'omniauth'
 
-gem 'omniauth-twitter'
-
-gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2' 
 
 gem 'jquery-validation-rails'
-# //= require jquery.validate
-# //= require jquery.validate.additional-methods
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -11,18 +11,16 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.validate
-//= require jquery.validate.additional-methods
-//= require jquery-ui
-//= require jquery_ujs
 //= require bootstrap-sprockets
-//= require autocomplete-rails
 //= require chosen-jquery
 //= require country_state_select
 //= require turbolinks
+//= require jquery-ui
+//= require jquery_ujs
+//= require autocomplete-rails
 //= require_tree .
 
-$(document).ready(function () {
-	$('.dropdown-toggle').dropdown();
-});
+// $(document).ready(function () {
+// 	$('.dropdown-toggle').dropdown();
+// });
 

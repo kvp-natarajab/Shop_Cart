@@ -1,8 +1,4 @@
-<style type="text/css">
-.error {
-    color: red;
-}
-</style>
+
 <div class="form-register-container">
   <div class="form-register-wrapper">
         <h2>Sign up</h2>
@@ -81,11 +77,11 @@
                       <%= f.label :pincode %><br />
                       <%= f.number_field :pincode, autofocus: true, class:"form-control" %>
                   </div>
+                  <div class="form-actions">
+                    <%= f.submit "Sign up",class:"btn btn-primary btn-form" %>
+                  </div>  
           </div>
-          </div>
-              <div class="form-actions">
-                  <%= f.submit "Sign up",class:"btn btn-primary btn-form" %>
-              </div>   
+          </div> 
       <% end %>
   </div>
 
