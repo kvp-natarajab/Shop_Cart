@@ -88,7 +88,6 @@ class User < ActiveRecord::Base
 
   def assign_role
     self.role = Role.find_by name: "Customer"
-    binding.pry
     self
   end
 	
