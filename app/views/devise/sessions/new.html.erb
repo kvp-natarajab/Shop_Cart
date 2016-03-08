@@ -30,41 +30,41 @@
 	</div>
 </div>
 <script type="text/javascript">
-$(document).ready(function() {
-      $("#signinForm").validate({
-        rules: {
-          "user[email]": {
-            required: true,
-            email: true
-          },
-          "user[password]":{
-            required:true,
-            minlength: 8
-          }  
-        },
+// $(document).ready(function() {
+//       $("#signinForm").validate({
+//         rules: {
+//           "user[email]": {
+//             required: true,
+//             email: true
+//           },
+//           "user[password]":{
+//             required:true,
+//             minlength: 8
+//           }  
+//         },
 
-        messages: {
-          "user[email]":{
-          	required:"Please enter your email",
-          	email:"Please enter valid email"
-          },
-          "user[password]":{
-          	required:"Please enter your password",
-          	minlength:"password should contain 8 characters"
-          }
-        },
-        highlight: function (element) {
-            $(element).addClass('error')
-        },
-        unhighlight: function (element) {
-            $(element).removeClass('error')
-        },
-        submitHandler: function(form) {
-            form.submit();
-        }
+//         messages: {
+//           "user[email]":{
+//           	required:"Please enter your email",
+//           	email:"Please enter valid email"
+//           },
+//           "user[password]":{
+//           	required:"Please enter your password",
+//           	minlength:"password should contain 8 characters"
+//           }
+//         },
+//         highlight: function (element) {
+//             $(element).addClass('error')
+//         },
+//         unhighlight: function (element) {
+//             $(element).removeClass('error')
+//         },
+//         submitHandler: function(form) {
+//             form.submit();
+//         }
         
-        });
+//         });
 
- });
+//  });
 
 </script>
