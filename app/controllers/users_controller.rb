@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_action :user_param, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
   layout :choose_layout
  
   def index
@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
 
   def create
+    binding.pry
     respond_to do |format|
       if @user.save
         format.html { redirect_to root_path, notice: 'User was successfully created.' }
@@ -54,6 +55,18 @@ class UsersController < ApplicationController
     end
   end
 
+   def finish_signup
+    # authorize! :update, @user 
+    if request.patch? && params[:user] #&& params[:user][:email]
+      if @user.update(user_params)
+        @user.skip_reconfirmation!
+        sign_in(@user, :bypass => true)
+        redirect_to root_path, notice: 'Your profile was successfully updated.'
+      else
+        @show_errors = true
+      end
+    end
+  end
 
   def destroy
     @user.destroy
@@ -67,6 +80,10 @@ class UsersController < ApplicationController
   private
     def needs_password?(user, params)
       params[:password].present?
+    end
+
+    def set_user
+      @user = User.find(params[:id])
     end
 
    

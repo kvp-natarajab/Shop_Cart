@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root :controller => 'home', :action => 'index'
-  devise_for :users, :controllers => { registrations: "users/registrations" }
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: "users/registrations" }
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get "application/autocomplete_product_product_name" => 'application#autocomplete_product_product_name'
   resources :roles

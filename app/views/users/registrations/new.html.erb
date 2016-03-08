@@ -58,14 +58,16 @@
                     <%= f.label :landmark %><br>
                     <%= f.text_field :landmark, autofocus: true, class:"form-control" %>
                   </div>
+
                   <div class="field">
                     <%= f.label :country %><br>
-                    <%= f.text_field :country, autofocus: true, class:"form-control" %>
+                    <%= f.select :country, CountryStateSelect.countries_collection %>
                   </div>
                 
                   <div class="field">
                     <%= f.label :state %><br>
-                    <%= f.text_field :state, autofocus: true, class:"form-control" %>
+                    <% options = { form: f, field_names: { :country => :country, :state => :state } } %>
+                    <%= f.select :state, CountryStateSelect.state_options(options) %>
                   </div>
                
                   <div class="field">
@@ -89,6 +91,14 @@
 
 
 <script type="text/javascript">
+
+$(document).on('ready page:load', function() {
+return CountryStateSelect({
+  country_id: "user_country",
+  state_id: "user_state",
+  city_id: "user_city",
+});
+});
 // $(document).ready(function() {
 //       $("#signupForm").validate({
 //         rules: {

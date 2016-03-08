@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308045236) do
+ActiveRecord::Schema.define(version: 20160308065912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 20160308045236) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "order_details", force: :cascade do |t|
     t.integer  "order_number"
@@ -139,16 +149,19 @@ ActiveRecord::Schema.define(version: 20160308045236) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.string   "provider"
-    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "brands", "subcategories"
+  add_foreign_key "identities", "users"
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "products"
   add_foreign_key "orders", "shippers"
