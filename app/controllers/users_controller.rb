@@ -18,7 +18,6 @@ class UsersController < ApplicationController
 
 
   def create
-    binding.pry
     respond_to do |format|
       if @user.save
         format.html { redirect_to root_path, notice: 'User was successfully created.' }
