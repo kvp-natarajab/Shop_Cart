@@ -88,6 +88,7 @@ class User < ActiveRecord::Base
 
   def assign_role
     self.role = Role.find_by name: "Customer"
+    self
   end
 	
   def admin?
