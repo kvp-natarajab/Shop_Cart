@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: mycart_production
-  username: mycart
-  password: <%= ENV['MYCART_DATABASE_PASSWORD'] %>
+  database: mycart_development
