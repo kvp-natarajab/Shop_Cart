@@ -32,7 +32,7 @@
 		<tr>
 			<td><%= subcat.name %></td>
 			<td><%= subcat.description %></td>
-			<td><%= subcat.category.name %></td>
+			<td><%= subcat.category.name if subcat.name.nil?%></td>
 			<td><%= link_to 'Show', subcat %></td>
 			<td>
 				<% if can? :update, Subcategory %>

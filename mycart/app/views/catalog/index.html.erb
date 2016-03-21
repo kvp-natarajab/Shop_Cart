@@ -1,9 +1,0 @@
-<% @products.each do |product| %>
-		<div class="product-display">
-			<%= image_tag product.avatar.url(:thumb) %>
-		
-			<b><%= product.product_name %></b><br/>
-			Rs.<%= product.unit_price %><br/>
-			<%= link_to 'Add to cart' %>
-		</div>
-<% end %>

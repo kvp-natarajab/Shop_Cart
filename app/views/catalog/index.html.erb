@@ -1,37 +1,71 @@
 
 <div class="product-container">
+	<div class="product-sort">
+	<ul>
+		
+	</ul>
+	</div>
 	<div class="catalog-sidebar">
-		<p>Browse By Sub category</p>
-		<% if params[:id] or params[:search_text] %>
-			<% @subcategories=Subcategory.where(category_id: params[:id]) %>
-				<% @subcategories.each do |subcategory| %>
-		  		<%= link_to subcategory.name, catalog_index_path(:sub_cat_id => subcategory.id) %></a><br/> 
-		  		<% end %>
-		<% end %>
+		<div class="catalog-sidebar-sub">
+			<h4>Sub category</h4>
+			<% if params[:id] or params[:search_text] %>
+				<% @subcategories=Subcategory.where(category_id: params[:id]) %>
+					<% @subcategories.each do |subcategory| %>
+			  		<%= link_to(subcategory.name, catalog_index_path(:sub_cat_id=> subcategory.id), :class=>'subcategory_list') %></a><br/>
+			  		<% end %>
+			<% end %>
+		</div>
+		<div class="catalog-sidebar-brand">
+			
+		</div>
 	</div>
 	<div class="product-bar">
-		<% if @products.empty? %>
+		<% if @products.nil? %>
 			No products found
+		<% else %>
+			<% @products.each do |product| %>
+				<div class="product-wrapper">
+					<div class="product-display">
+						<%= link_to image_tag(product.avatar.url(:thumb)), product_path(product) %><br/>
+						<b><%= product.product_name %></b>
+					</div>
+					<div class="product-description">
+						<% if product.discount > 0 %>
+							<del><span class="rupee">&#8377;</span>
+							<%= product.unit_price.round %></del>(<%=product.discount%>%)
+							<br/>
+							<span class="rupee">&#8377;</span>
+							<%= current_user.price_after_discount(product.unit_price.to_f,product.discount.to_f) %>
+							<br/>
+						<% else %>
+							<span class="rupee">&#8377;</span><%= product.unit_price.round %><br/>
+						<% end %>
+					</div>
+				</div>
+			<%end%>
 		<% end %>
-		<% @products.each do |product| %>
-			<div class="product-wrapper">
-				<div class="product-display">
-					<%= link_to image_tag(product.avatar.url(:thumb)), product_path(product) %><br/>
-					<b><%= product.product_name %></b>
-				</div>
-				<div class="product-description">
-					<% if product.discount > 0 %>
-						<del><span class="rupee">&#8377;</span>
-						<%= product.unit_price.round %></del>(<%=product.discount%>%)
-						<br/>
-						<span class="rupee">&#8377;</span>
-						<%= current_user.price_after_discount(product.unit_price.to_f,product.discount.to_f) %>
-						<br/>
-					<% else %>
-						<span class="rupee">&#8377;</span><%= product.unit_price.round %><br/>
-					<% end %>
-				</div>
-			</div>
-		<%end%><br>
 	</div>
 </div>
+<script>
+// $(document).ready(function(){ 
+//       $('.subcategory_list').on("ready click",function(e){
+//            $.ajax({
+//             url: $(this).attr("href"),                              
+//             type: 'GET',
+//             dataType: 'json',
+//             success: function (dataSet, textStatus, jqXHR) {
+//               if(!$.isEmptyObject(dataSet)){
+//                 $(".catalog-sidebar-brand").html('');
+//                 $(".catalog-sidebar-brand").html('<h3>Select Brand</h3>');
+//                 $.each(dataSet, function(i, data){
+//                         var option = $("<a>");
+//                         option.href(data.id);
+//                         option.text(data.name);
+//                         $(".catalog-sidebar-brand").append(option);
+//                 });
+//               }
+//             }
+//           });
+//       });
+// });
+</script>

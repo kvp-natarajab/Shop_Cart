@@ -1,69 +1,133 @@
-<div class="form-product-container">
-  <div class="form-product-wrapper">
-      <%= form_for(@product, html: { multipart: true }) do |f| %>
-        <% if @product.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-            <ul>
-            <% @product.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
-         <div class="form form-wrapper-left">
-
-              <div class="field">
-                <%= f.label :product_name %><br>
-                <%= f.text_field :product_name, class:"form-control" %>
-              </div>
-              <div class="field">
-                <%= f.label :description %><br>
-                <%= f.text_area :description, rows: 6, class:"form-control" %>
-              </div>
-              <div class="field">
-                <%= f.label :unit_price %><br>
-                <%= f.number_field :unit_price, class:"form-control" %>
-              </div>
-               <div class="field">
-                <%= f.label :total_unit %><br>
-                <%= f.number_field :total_unit, class:"form-control" %>
-              </div>
-              <div class="field">
-                <%= f.label :unit_in_stock %><br>
-                <%= f.number_field :unit_in_stock, class:"form-control" %>
-              </div>
-               <div class="field">
-                <%= f.label :discount %><br>
-                <%= f.number_field :discount, class:"form-control" %>
-              </div>
-          </div>
-           <div class="form form-wrapper-right">
-
-                <div class="field">
-                  <%= f.label :avatar %><br>
-                  <%= f.file_field :avatar %>
-                </div>
-
-                <div class="field">
-                  <%= f.label :category_id %><br>
-                  <%= f.collection_select(:category_id, Category.all, :id, :name, { :prompt => "Select Category" }, class:"form-control" ) %>
-                </div>
-
-                 <div class="field">
-                  <%= f.label :subcategory_id %><br>
-                  <%= f.collection_select(:subcategory_id, Subcategory.all, :id, :name, { :prompt => "Select Sub Category" }, class:"form-control" ) %>
-                </div>
-
-                 <div class="field">
-                  <%= f.label :brand_id %><br>
-                  <%= f.collection_select(:brand_id, Brand.all, :id, :name, { :prompt => "Select Brand" }, class:"form-control" ) %>
-                </div>
-                <div class="actions">
-                  <%= f.submit class:"btn btn-primary btn-form" %>
-                </div>
+            <h4>Product Info</h4>
             </div>
-      <% end %>
+            <%= form_for(@product, remote: true, html: { multipart: true, style: "display:inline;" }) do |f| %>
+                      <div class="modal-body">
+                      <% if @product.errors.any? %>
+                      <div id="error_explanation">
+                      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+                      <ul>
+                      <% @product.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                      <% end %>
+                      </ul>
+                      </div>
+                      <% end %>
+
+                      <div class="field">
+                      <%= f.label :product_name %><br>
+                      <%= f.text_field :product_name, class:"form-control" %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :description %><br>
+                      <%= f.text_area :description, rows: 6, class:"form-control" %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :unit_price %><br>
+                      <%= f.number_field :unit_price, class:"form-control" %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :total_unit %><br>
+                      <%= f.number_field :total_unit, class:"form-control" %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :unit_in_stock %><br>
+                      <%= f.number_field :unit_in_stock, class:"form-control" %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :discount %><br>
+                      <%= f.number_field :discount, class:"form-control" %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :avatar %><br>
+                      <%= f.file_field :avatar %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :category_id %><br>
+                      <%= f.collection_select(:category_id, Category.all, :id, :name, { :prompt => "Select Category" }, class:"form-control" ) %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :subcategory_id %><br>
+                      <%= f.collection_select(:subcategory_id, {}, {}, {}, { :prompt => "Select Sub Category" }, class:"form-control" ) %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :brand_id %><br>
+                      <%= f.collection_select(:brand_id,{}, {}, {}, { :prompt => "Select Brand" }, class:"form-control" ) %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :shipper %><br>
+                      <%= f.collection_select(:shipper_id, Shipper.all, :id, :company_name, { :prompt => "Select Shipper" }, class:"form-control") %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :delivery_charge %><br>
+                      <%= f.text_field :freight, class:"form-control" %>
+                      </div>
+
+                      <div class="field">
+                      <%= f.label :status %><br>
+                       <%= f.collection_radio_buttons :active, [[true, 'Active'] ,[false, 'Inactive']],:first, :last %> 
+                      </div>
+
+                      <div class="actions">
+                      <%= f.submit class:"btn btn-primary btn-form" %>
+                      </div>
+
+            <% end %>
   </div>
 </div>
+            
+<script>
+$(document).ready(function(){ 
+      $('#product_category_id').change(function(){
+           $.ajax({
+            url: '/products/sub_cat/'+this.value,                              
+            type: 'GET',
+            dataType: 'json',
+            success: function (dataSet, textStatus, jqXHR) {
+              if(!$.isEmptyObject(dataSet)){
+                $("#product_subcategory_id").html('');
+                $("#product_subcategory_id").html('<option>Select Sub category</option>');
+                $.each(dataSet, function(i, data){
+                        var option = $("<option>");
+                        option.val(data.id);
+                        option.text(data.name);
+                        $("#product_subcategory_id").append(option);
+                });
+              }
+            }
+          });
+      });
+      $('#product_subcategory_id').change(function(){
+           $.ajax({
+            url: '/products/brand/'+this.value,                              
+            type: 'GET',
+            dataType: 'json',
+            success: function (dataSet, textStatus, jqXHR) {
+              if(!$.isEmptyObject(dataSet)){
+                $("#product_brand_id").html('');
+                $("#product_brand_id").html('<option>Select Brand</option>');
+                $.each(dataSet, function(i, data){
+                        var option = $("<option>");
+                        option.val(data.id);
+                        option.text(data.name);
+                        $("#product_brand_id").append(option);
+                });
+              }
+            }
+          });
+      });
+
+});
+</script>

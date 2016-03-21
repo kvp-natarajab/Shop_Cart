@@ -19,7 +19,7 @@
 <table id="shipperTable">
 	<thead>
 		<tr>
-			<th>Comapny name</th>
+			<th>Company name</th>
 			<th>Phone</th>
 			<th>No od days required for delivery</th>
 			<th>Show</th>
@@ -30,9 +30,9 @@
 	<tbody>
 		<% @shipper.each do |shipper| %>
 		<tr>
-			<td><%= shipper.name %></td>
-			<td><%= shipper.description %></td>
-			<td><%= shipper.no_of_day %></td>
+			<td><%= shipper.company_name %></td>
+			<td><%= shipper.phone %></td>
+			<td><%= shipper.day %></td>
 			<td><%= link_to 'Show', shipper %></td>
 			<td><%= link_to 'Edit', edit_shipper_path(shipper)%></td>
 			<td><%= link_to 'Delete', shipper, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %></td>

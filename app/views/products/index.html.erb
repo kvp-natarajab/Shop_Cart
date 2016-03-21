@@ -9,7 +9,7 @@
     <div class="total-order-wrapper">
       <p class="total-amount-p">
         <% if can? :create, Product %>
-          <%= link_to 'New Product', new_product_path,{class:"btn btn-default"} %>
+          <%= link_to 'New Product', new_product_path, class: "btn btn-primary" %>
         <% end %>
         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show/Hide Panel</a>
       </p>
@@ -66,9 +66,9 @@
             
 <script>
 $(document).ready(function(){
-    oTable = $('#productTable').DataTable( {
+  oTable = $('#productTable').DataTable( {
       "sDom": '<"top"i>rt<"bottom"flp><"clear">'
-    });   
+  });   
   $('#myInputTextField').keyup(function(){
       oTable.search($(this).val()).draw() ;
   });

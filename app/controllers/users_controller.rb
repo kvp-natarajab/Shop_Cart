@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
+  
   layout :choose_layout
  
   def index
@@ -54,19 +55,6 @@ class UsersController < ApplicationController
     end
   end
 
-   def finish_signup
-    # authorize! :update, @user 
-    if request.patch? && params[:user] #&& params[:user][:email]
-      if @user.update(user_params)
-        @user.skip_reconfirmation!
-        sign_in(@user, :bypass => true)
-        redirect_to root_path, notice: 'Your profile was successfully updated.'
-      else
-        @show_errors = true
-      end
-    end
-  end
-
   def destroy
     @user.destroy
     respond_to do |format|
@@ -76,6 +64,23 @@ class UsersController < ApplicationController
   end
 
 
+
+  def finish_signup
+    user = User.find_by("email= '#{current_user.email}' and sign_in_count>1") 
+    if user.present?
+      redirect_to new_user_session_path
+      return
+    end
+    if request.patch? && params[:user] #&& params[:user][:email]
+      if @user.update(user_params)
+        sign_in(@user, :bypass => true)
+        redirect_to root_path, notice: 'Your profile was successfully updated.'
+      else
+        @show_errors = true
+      end
+    end
+  end
+
   private
     def needs_password?(user, params)
       params[:password].present?
@@ -84,10 +89,9 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
     end
-
    
     def user_params
-      accessible = [ :name, :email, :password, :password_confirmation, :role_id, :landmark, :phone, :address, :city, :state, :country, :pincode ] 
+      accessible = [ :name, :email, :password, :password_confirmation, :role_id, :landmark, :phone, :address, :city, :state, :country, :pincode, :provider, :uid ] 
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
     end

@@ -1,0 +1,390 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+@import "chosen";
+
+
+body{
+    font-family: Helvetica,FreeSans,"Liberation Sans",Helmet,Arial,sans-serif;
+}
+.notification{
+    width: 79%;
+    margin-left: 250px;
+    margin-top: 50px;
+}
+.notice{
+    color:#ff0000;
+}
+.alerts{
+    color:#ff0000;
+}
+.dataTables_filter { visibility: hidden;}
+
+.logo{
+    padding-top: 5px;
+}
+.login-container-fluid{
+    margin-top:100px;
+}
+.login-container{
+    border-radius:3px;
+    width:400px;
+    margin:0 auto; 
+    background-color:#027CD5;   
+}
+.login-wrapper{
+    padding:10px;
+}
+.login-wrapper a{
+    color:#fff;
+}
+.search-text{
+    width:260px;
+    height:30px;
+}
+.btn-login{
+    width:380px;
+}
+.login-wrapper h3{
+    text-align:center;
+    color:#fff;
+}
+.social-container{
+    width:400px;
+    height:auto;
+}
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+}
+
+.ui-autocomplete{
+    z-index:1031;
+}
+.slide-container{
+    width:800px;
+    padding-top:60px;
+    margin:0 auto;
+}
+
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border:4px solid black;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border:1px solid black;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-form{
+    margin-top:10px;
+    padding:5px;
+    text-align:center;
+    width:400px;
+}
+.page-content-wrapper{
+    padding:10px;
+}
+
+.search-container{
+    width:350px;
+    padding-top:10px;
+    float:left;
+}
+.search_text{
+    width:320px;
+}
+.cart-container{
+    padding-top:50px;
+    width:600px;
+    margin:0 auto;
+}
+.navbar{
+    background-color:#027CD5;
+    
+}
+.nav a{
+    color:#ffffff;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: #262626;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+     background-color: #262626;
+}
+
+#wrapper {
+    margin-top:50px;
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+	padding-top: 20px;
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+.alert-message-container{
+	padding-top: 100px;
+}
+
+
+.product-show-container{
+    padding-top:150px;
+    width:800px;
+    margin:0 auto;
+}
+.product-index-display{
+    margin-top:60px;
+}
+
+
+.rupee{
+    font-weight:bold;    
+}
+
+
+.product-show-image{
+    float:left;
+    margin-right:20px;
+}
+.product-show-description{
+    padding:50px;
+}
+.cart-container{
+    text-align:center;
+}
+.cart-table td{
+    padding:5px;
+    border:1px solid  #737373;
+}
+.btns{
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    background: #f75b16;
+    border: 1px solid #ec6723;
+    color: #f9f9f9;
+}
+.head{
+    font-size: 18px;
+    font-weight:200px;
+}
+.order-search-container{
+    width:100%;
+    height:auto;
+    border:1px solid black;
+    text-align:center;
+}
+#myInputTextField{
+    padding-left:5px;
+    width: 250px;
+    height: 30px;
+}
+.total-amount-p{
+    font-size: 16px;
+    padding-top:5px;
+    margin:0px;
+}
+.heading-container{
+    width:100%;
+    padding:5px;
+}
+.search-container{
+    width:100%;
+    height:auto;
+    padding:5px;
+}
+.search-oder-wrapper{
+    padding:5px;
+    float:left;
+}
+.total-order-wrapper{
+    float:right;
+}
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  position: relative;
+  margin-left: 0px;
+  margin-top: 4px \9;
+}
+.form-register-container{
+    width:900px;
+    margin:0 auto;
+    height:300px;
+    padding-top:50px;
+    clear: both;
+}
+.form-register-wrapper{
+    
+}
+.form{
+    width:430px;
+    height:auto;
+    padding:20px;
+    border-radius:5px;  
+}
+.form-wrapper-left{
+    float:left;
+}
+.form-wrapper-right{
+    float: right;
+}
+.form-product-container{
+    padding-top:50px;
+    clear: both;
+}
+
+
+
+
+
+
+
+
+
+
+

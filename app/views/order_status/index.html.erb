@@ -1,0 +1,54 @@
+<div class="order-search-container">
+  <div class="heading-container">
+    <span class="head">Order Status Details</span>
+  </div>
+  <div class="search-container">
+    <div class="search-oder-wrapper">
+      <input type="text" id="myInputTextField" placeholder="Search">
+    </div>
+    <div class="total-order-wrapper">
+      <p class="total-amount-p">
+  			<%= link_to 'New category', new_category_path,{class:"btn btn-default"} %>
+		<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show/Hide Panel</a>
+      </p>
+    </div>
+  </div>
+</div>
+<table id="categoryTable">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Show</th>
+		<th>Edit</th>
+		<th>Destroy</th>
+	</tr>
+	</thead>
+	<tbody>
+	<% @order_status.each do |status| %>
+	<tr>
+		<td><%= status.name %></td>
+		<td><%= link_to 'Show', status %></td>
+		<td>
+			
+				
+			
+		</td>
+		<td>
+			
+				<%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure? order status details will be deleted.' } %>
+		
+		</td>
+	</tr>
+	<% end %>
+	</tbody>
+</table>
+<script>
+$(document).ready(function(){
+	oTable = $('#categoryTable').DataTable( {
+      "sDom": '<"top"i>rt<"bottom"flp><"clear">'
+    });   
+	$('#myInputTextField').keyup(function(){
+	      oTable.search($(this).val()).draw() ;
+	});
+});
+</script>

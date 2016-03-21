@@ -53,8 +53,8 @@ class OrdersController < ApplicationController
 
 
 	def save_order_details(order_number,order_id,product_id,product_quantity)
-		 product = Product.select(:discount).find(product_id)
-		 @order_detail = OrderDetail.new(order_number: order_number, quantity: product_quantity, discount: product.discount, order_id: order_id, product_id: product_id)
+		 product = Product.select(:discount, :user_id).find(product_id)
+		 @order_detail = OrderDetail.new(order_number: order_number, quantity: product_quantity, discount: product.discount, order_id: order_id, product_id: product_id, user_id: product.user_id)
 		 @order_detail.save
 	end
 end

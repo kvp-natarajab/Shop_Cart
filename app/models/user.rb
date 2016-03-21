@@ -1,49 +1,35 @@
 class User < ActiveRecord::Base
 
+  belongs_to :role
+  has_many :orders, :dependent => :destroy
+  has_many :products, :dependent => :destroy
+
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
 
-  devise :database_authenticatable, :registerable, :confirmable,
-    :recoverable, :rememberable, :trackable, :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
-
-    # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
-
-    # If a signed_in_resource is provided it always overrides the existing user
-    # to prevent the identity being locked with accidentally created accounts.
-    # Note that this may leave zombie accounts (with no associated identity) which
-    # can be cleaned up at a later date.
     user = signed_in_resource ? signed_in_resource : identity.user
-
-    # Create the user if needed
     if user.nil?
-
-      # Get the existing user by email if the provider gives us a verified email.
-      # If no verified email was provided we assign a temporary email and ask the
-      # user to verify it on the next step via UsersController.finish_signup
-      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
-      email = auth.info.email if email_is_verified
+      email = auth.info.email if auth.info.email.present?
       user = User.where(:email => email).first if email
-
-      # Create the user if it's a new registration
       if user.nil?
         user = User.new(
           name: auth.extra.raw_info.name,
-          #username: auth.info.nickname || auth.uid,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )
         user = user.assign_role if user.role.nil?
-        user.skip_confirmation!
         user.save!
       end
     end
 
-    # Associate the identity with the user if needed
     if identity.user != user
       identity.user = user
       identity.save!
@@ -51,22 +37,39 @@ class User < ActiveRecord::Base
     user
   end
 
-  def email_verified?
-    self.email && self.email !~ TEMP_EMAIL_REGEX
+  def assign_role
+      self.role = Role.find_by name: "Customer"
+      self
+  end
+  
+  def admin?
+    unless self.role.nil?
+        self.role.name == "Admin"
+      else
+        self.assign_role
+      end
+  end
+
+  def seller?
+    unless self.role.nil?
+        self.role.name == "Seller"
+      end
+  end
+    
+  def customer?
+    unless self.role.nil?
+        self.role.name == "Customer"
+    end
   end
 
   
-	belongs_to :role
-	has_many :orders, :dependent => :destroy
-	has_many :products, :dependent => :destroy
+
 	# validates :name, :email, :address, :pincode, :password, :phone, presence: true
-	validates :email, uniqueness: true # format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/,
-	validates :address, length: { maximum: 200 }
+	# validates :email, uniqueness: true # format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/,
+	# validates :address, length: { maximum: 200 }
 	# validates :phone, uniqueness: true, format: { with: /((0091)|(\+91)|0?)[789]{1}\d{9}/, message: "is not valid" }
 	# validates :landmark, length: { minimum: 5 }, allow_blank: true
 	# validates :pincode, length: { minimum: 6 } 
-
-
 
 
   def cart_count
@@ -79,33 +82,16 @@ class User < ActiveRecord::Base
 
 	def price_after_discount(unit_price,discount)
      	(unit_price-(unit_price * ((discount)/100))).round
-  	end
+  end
 
 
 	def user_id
 		id
 	end
-
-  def assign_role
-    self.role = Role.find_by name: "Customer"
-    self
-  end
-	
-  def admin?
-	    self.role.name == "Admin"
-	end
-
-	def seller?
-	    self.role.name == "Seller"
-	end
-	  
-	def customer?
-	    self.role.name == "Customer"
-	end
   
 
 	def seller_list
     	User.where(:role_id => role_id).map{|u| [u.id,u.name]}
-  	end
+  end
  
 end

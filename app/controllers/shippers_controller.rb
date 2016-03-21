@@ -53,10 +53,10 @@ class ShippersController < ApplicationController
 	private
 
 	def shipper_params
-		params.require(:shipper).permit(:company_name, :no_of_day, :phone)
+		params.require(:shipper).permit(:company_name, :day, :phone)
 	end
 
 	def set_shipper
-		@shipper = Shipper.find(paramas[:id])
+		@shipper = Shipper.find(params[:id])
 	end
 end

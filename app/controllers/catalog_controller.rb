@@ -10,8 +10,9 @@ class CatalogController < ApplicationController
 		elsif params[:category_id]
 			@products = Product.where(:category_id => params[:category_id])
 		elsif params[:sub_cat_id]
-			@products = Product.where(:subcategory_id => params[:sub_cat_id])
-		end
-			
+			@products = Product.where(:subcategory_id => params[:sub_cat_id].to_i)
+			@brands = Brand.select(:name,:id).where(subcategory_id: params[:id])
+			render json: @brands
+		end	
 	end
 end

@@ -10,17 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require bootstrap-sprockets
-//= require chosen-jquery
-//= require country_state_select
+
 //= require turbolinks
-//= require jquery-ui
-//= require jquery_ujs
-//= require autocomplete-rails
 //= require_tree .
 
-// $(document).ready(function () {
-// 	$('.dropdown-toggle').dropdown();
-// });
 

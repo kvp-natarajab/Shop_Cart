@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root :controller => 'home', :action => 'index'
-  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: "users/registrations" }
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', sessions: 'devise/sessions' }
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get "application/autocomplete_product_product_name" => 'application#autocomplete_product_product_name'
   resources :roles
@@ -19,9 +19,16 @@ Rails.application.routes.draw do
   end
   get "/orders/new" => "orders#new"
   get "/products/search/:search_text" => "products#search", as: :search
+  get "/products/sub_cat/:id" => "products#subcat"
+  get "/products/brand/:id" => "products#brand"
+  get "/catalog/sub_cat/:id" => "catalog#brand"
   get "orders/show"
-  resources :users
+  devise_scope :user do
+      get "users/sign_out", :to => "devise/sessions#destroy"
+  end
+  get "users/finish_signup"
   resources :order_details
+  resources :order_statuses
   # get "users/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

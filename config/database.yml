@@ -19,6 +19,7 @@ default: &default
   encoding: unicode
   username: nataraj
   password: 990269
+  host: localhost
   pool: 5
 
 development:

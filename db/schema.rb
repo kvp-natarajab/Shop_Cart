@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308065912) do
+ActiveRecord::Schema.define(version: 20160318064054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160308065912) do
     t.integer  "order_number"
     t.integer  "quantity"
     t.integer  "discount"
+    t.integer  "user_id"
     t.integer  "order_id"
     t.integer  "product_id"
     t.datetime "created_at",   null: false
@@ -55,19 +56,25 @@ ActiveRecord::Schema.define(version: 20160308065912) do
 
   add_index "order_details", ["order_id"], name: "index_order_details_on_order_id", using: :btree
   add_index "order_details", ["product_id"], name: "index_order_details_on_product_id", using: :btree
+  add_index "order_details", ["user_id"], name: "index_order_details_on_user_id", using: :btree
+
+  create_table "order_statuses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "orders", force: :cascade do |t|
     t.integer  "ordernumber"
     t.datetime "order_date"
     t.datetime "shipped_date"
-    t.decimal  "freight",      precision: 12, scale: 2
     t.integer  "user_id"
-    t.integer  "shipper_id"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.integer  "order_status_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  add_index "orders", ["shipper_id"], name: "index_orders_on_shipper_id", using: :btree
+  add_index "orders", ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
@@ -75,34 +82,28 @@ ActiveRecord::Schema.define(version: 20160308065912) do
     t.string   "description"
     t.decimal  "unit_price",          precision: 12, scale: 2
     t.integer  "total_unit"
-    t.integer  "unit_in_stock"
-    t.integer  "discount"
-    t.integer  "user_id"
-    t.integer  "category_id"
-    t.integer  "subcategory_id"
-    t.integer  "brand_id"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "unit_in_stock"
+    t.decimal  "freight",             precision: 12, scale: 2
+    t.integer  "discount"
+    t.boolean  "active"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.integer  "subcategory_id"
+    t.integer  "brand_id"
+    t.integer  "shipper_id"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
   add_index "products", ["brand_id"], name: "index_products_on_brand_id", using: :btree
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+  add_index "products", ["shipper_id"], name: "index_products_on_shipper_id", using: :btree
   add_index "products", ["subcategory_id"], name: "index_products_on_subcategory_id", using: :btree
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
-
-  create_table "purchases", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "user_id"
-    t.integer  "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "purchases", ["product_id", "user_id", "order_id"], name: "index_purchases_on_product_id_and_user_id_and_order_id", unique: true, using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -112,7 +113,7 @@ ActiveRecord::Schema.define(version: 20160308065912) do
   end
 
   create_table "shippers", force: :cascade do |t|
-    t.string   "compnay_name"
+    t.string   "company_name"
     t.string   "phone",        limit: 14
     t.integer  "day"
     t.datetime "created_at",              null: false
@@ -149,10 +150,6 @@ ActiveRecord::Schema.define(version: 20160308065912) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
   end
@@ -164,10 +161,12 @@ ActiveRecord::Schema.define(version: 20160308065912) do
   add_foreign_key "identities", "users"
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "products"
-  add_foreign_key "orders", "shippers"
+  add_foreign_key "order_details", "users"
+  add_foreign_key "orders", "order_statuses"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "shippers"
   add_foreign_key "products", "subcategories"
   add_foreign_key "products", "users"
   add_foreign_key "subcategories", "categories"

@@ -11,11 +11,14 @@
     <div class="form-group">
       <%= f.label :email %>
       <div class="controls">
-        <%= f.text_field :email, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'Example: email@me.com' %>
+        <%= f.text_field :email, :autofocus => true, :value => "#{current_user.email}", class: 'form-control input-lg' %>
         <p class="help-block">Please confirm your email address. No spam.</p>
       </div>
       <div class="controls">
         <%= f.password_field :password, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'password' %>
+      </div>
+      <div class="controls">
+        <%= f.text_area :address, :autofocus => true, :value => '', class: 'form-control input-lg' %>
       </div>
     </div>
     <div class="actions">
