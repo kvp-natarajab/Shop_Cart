@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get "application/autocomplete_product_product_name" => 'application#autocomplete_product_product_name'
   resources :roles
-  get 'carts/show' => 'cart'
+  # get 'carts/show'
   get 'catalog/index'
   # get '/auth/:provider/callback', to: 'sessions#create'
   resources :products
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resource :cart, only: [:show] do
     put 'add/:product_id', to: 'carts#add', as: :add_to
     put 'remove/:product_id', to: 'carts#remove', as: :remove_from
+    get 'show', to: 'carts#show', as: :cart
   end
   get "/orders/new" => "orders#new"
   get "/products/search/:search_text" => "products#search", as: :search

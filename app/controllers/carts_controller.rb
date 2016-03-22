@@ -8,12 +8,12 @@ class CartsController < ApplicationController
 
   def add
   	$redis.sadd current_user_cart, params[:product_id]
-    redirect_to carts_show_path
+    redirect_to cart_path
   end
 
   def remove
   	$redis.srem current_user_cart, params[:product_id]
-    redirect_to carts_show_path
+    redirect_to cart_path
   end
 
 
