@@ -1,4 +1,16 @@
 
+
+
+<script type="text/javascript">
+  $(document).on('ready page:load', function() {
+  return CountryStateSelect({
+    country_id: "user_country",
+    state_id: "user_state",
+    city_id: "user_city",
+  });
+});
+</script>
+
 <div class="form-register-container">
   <div class="form-register-wrapper">
         <h2>Sign up</h2>
@@ -91,13 +103,13 @@
 
 
 <script type="text/javascript">
-$(document).on('ready page:load', function() {
-return CountryStateSelect({
-  country_id: "user_country",
-  state_id: "user_state",
-  city_id: "user_city",
-});
-});
+//   $(document).on('ready page:load', function() {
+//   return CountryStateSelect({
+//     country_id: "user_country",
+//     state_id: "user_state",
+//     city_id: "user_city",
+//   });
+// });
 
 // $(document).ready(function() {
 //       $("#signupForm").validate({

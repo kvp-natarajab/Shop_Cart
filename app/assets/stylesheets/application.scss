@@ -12,11 +12,11 @@
  *
  *
  *
-*= require bootstrap3-switch
- *= require_self
- *= require_tree .
+
  */
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
 @import "chosen";
 
 .ui-menu-item{

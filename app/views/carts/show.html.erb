@@ -30,7 +30,7 @@
                     <%= cart_product.description %>
                 </td>
                 <td>
-                    <input name="quantity[<%=index%>]" id="quantity_<%=index%>" type="number" class="change_subtotal" size="2" value="1"/>
+                    <input name="quantity[<%=index%>]" id="quantity_<%=index%>" type="number" class="change_subtotal" size="2" value="1" min='1'/>
                 </td>
                 <td>
                     <input type="hidden" name="price[<%=index%>]" id="price_<%=index%>" value="<%= cart_product.unit_price %>"/>
@@ -109,6 +109,7 @@ function subtotal(){
 function check_stock(){
     $("tr[id*='product-record-']").each(function(){
         var quantity = $("input[id*='quantity_"+$(this).attr("data-index")+"']").val();
+        var index = $(this).attr("data-index");
         var unit=0;
         $.ajax({
             url: '/carts/unit',
@@ -120,15 +121,11 @@ function check_stock(){
             dataType: 'json',
             success: function (dataSet, textStatus, jqXHR) {
                if(!$.isEmptyObject(dataSet)){
-                   unit = dataSet.unit_in_stock;
-                        document.getElementById("quantity_0").max = Number(unit);
-                        if(quantity > unit){
-                            alert('Product is out of stock only'+ unit +'is remaining');
-                        }
+                        unit = dataSet.unit_in_stock;
+                        document.getElementById("quantity_"+index).max = Number(unit);
                 }
               }
         });
-        
     });
 }
 

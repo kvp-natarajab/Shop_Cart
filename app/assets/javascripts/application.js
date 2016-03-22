@@ -15,8 +15,17 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require autocomplete-rails
-//= require chosen-jquery
-//= require country_state_select
 //= require bootstrap-switch
 //= require turbolinks
+//= require chosen-jquery
+//= require country_state_select
 //= require_tree .
+
+
+// $(document).on('ready page:load', function() {
+// return CountryStateSelect({
+// country_id: "user_country",
+// state_id: "user_state",
+// city_id: "user_city",
+// });
+// });
