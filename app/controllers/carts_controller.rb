@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!
-  
+ 
+
   def show
     cart_ids = $redis.smembers current_user_cart
     @cart_products = Product.find(cart_ids)
@@ -15,6 +16,7 @@ class CartsController < ApplicationController
   	$redis.srem current_user_cart, params[:product_id]
     redirect_to cart_path
   end
+
 
 
   def unit
