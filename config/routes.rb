@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get "application/autocomplete_product_product_name" => 'application#autocomplete_product_product_name'
   resources :roles
-  get 'carts/show' => 'carts#show'
-  
+  get 'carts/show' => 'carts'
   get 'catalog/index'
   # get '/auth/:provider/callback', to: 'sessions#create'
   resources :products
