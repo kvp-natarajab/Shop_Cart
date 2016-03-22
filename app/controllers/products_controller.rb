@@ -66,6 +66,8 @@ class ProductsController < ApplicationController
 		render json: @brands
 	end
 
+	
+
 	def search
 		@products = Product.select(:product_name).where('lower(product_name) LIKE ?', "#{params[:search_text].downcase}%")
 		render json: @products.map(&:product_name)	

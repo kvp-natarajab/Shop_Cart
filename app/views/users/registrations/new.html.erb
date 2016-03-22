@@ -24,7 +24,7 @@
 
                           <div class="field">
                               <%= f.label :role_id %><br>
-                               <%= f.collection_radio_buttons :role_id, [['1', 'Customer'] ,['2', 'Seller'],['3', 'Admin']],:first, :last %> 
+                               <%= f.collection_radio_buttons :role_id, [['1', 'Customer'] ,['2', 'Seller']],:first, :last %> 
                             </div>
                             
                             <div class="field">
@@ -91,7 +91,6 @@
 
 
 <script type="text/javascript">
-
 $(document).on('ready page:load', function() {
 return CountryStateSelect({
   country_id: "user_country",
@@ -99,6 +98,7 @@ return CountryStateSelect({
   city_id: "user_city",
 });
 });
+
 // $(document).ready(function() {
 //       $("#signupForm").validate({
 //         rules: {

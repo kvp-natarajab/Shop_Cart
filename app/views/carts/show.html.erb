@@ -8,7 +8,7 @@
         </div>
     </div>
 </div>
-    
+    <br/><br/>
     <%= form_tag("/orders/new", method: "get") do %>
         <table class="cart-table">
         <tr>
@@ -30,7 +30,7 @@
                     <%= cart_product.description %>
                 </td>
                 <td>
-                    <input name="quantity[<%=index%>]" id="quantity_<%=index%>" type="text" class="change_subtotal" size="2" value="1"/>
+                    <input name="quantity[<%=index%>]" id="quantity_<%=index%>" type="number" class="change_subtotal" size="2" value="1"/>
                 </td>
                 <td>
                     <input type="hidden" name="price[<%=index%>]" id="price_<%=index%>" value="<%= cart_product.unit_price %>"/>
@@ -47,7 +47,31 @@
                 </td>
         <% end %>
         </table>
-    
+
+        <button type="button" class="btns" data-toggle="collapse" data-target="#user_form">Checkout</button>
+          <div id="user_form" class="collapse">
+                    <div class="field">
+                        <label>Name</label>
+                        <input type="text" name="user_name" id="user_name" value="<%= current_user.name %>"/>
+
+                    </div>
+
+                    <div class="field">
+                        <label>Address</label>
+                        <input type="textarea" name="user_address" id="user_address" value="<%= current_user.address %>"/>
+                    </div>
+
+                    <div class="field">
+                       <label>Phone</label>
+                        <input type="text" name="user_phone" id="user_phone" value="<%= current_user.phone %>"/> 
+                    </div>
+
+                    <div class="field">
+                        <label>Pincode</label>
+                        <input type="text" name="user_pincode" id="user_pincode" value="<%= current_user.pincode %>"/> 
+                    </div>
+          </div>
+   
        
         <%= submit_tag("Place Order",:class=>"btns") %>
 
@@ -55,13 +79,16 @@
     
 </div>
 
-<script type="text/javascript">
+<script>
 $(document).ready(function(){
     subtotal();
-    $(".change_subtotal").keyup(function(){
+    $(".change_subtotal").change(function(){
         subtotal();
     });
 
+    $(".change_subtotal").change(function(){
+        check_stock();
+    });
 }); 
 
 function subtotal(){
@@ -78,5 +105,31 @@ function subtotal(){
     })
     document.getElementById("total").innerHTML=total;
 }
-    
+
+function check_stock(){
+    $("tr[id*='product-record-']").each(function(){
+        var quantity = $("input[id*='quantity_"+$(this).attr("data-index")+"']").val();
+        var unit=0;
+        $.ajax({
+            url: '/carts/unit',
+            data:{
+                'product_id':$("input[id*='product_"+$(this).attr("data-index")+"']").val(),
+                'quantity': quantity
+            },                            
+            type: 'GET',
+            dataType: 'json',
+            success: function (dataSet, textStatus, jqXHR) {
+               if(!$.isEmptyObject(dataSet)){
+                   unit = dataSet.unit_in_stock;
+                        document.getElementById("quantity_0").max = Number(unit);
+                        if(quantity > unit){
+                            alert('Product is out of stock only'+ unit +'is remaining');
+                        }
+                }
+              }
+        });
+        
+    });
+}
+
 </script>

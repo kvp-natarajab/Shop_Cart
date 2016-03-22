@@ -1,11 +1,12 @@
 
-
 <% if user_signed_in? %>
-
      	<% if current_user.admin? %>
      		<%= render template: "layouts/admin" %>
      	<% elsif current_user.seller? %>
 			<%= render template: "layouts/seller" %>
+		<% else %>
+				<%= render "layouts/alerts" %>
 		<% end %>
+<% else %>
 	
 <% end %> 

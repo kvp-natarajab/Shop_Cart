@@ -3,3 +3,24 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
 </div>
+
+
+<h2> Order Summary </h2>
+ <table class="cart-table">
+        <tr>
+            <th>Order Number</th>
+            <th>Product</th>
+            <th>Name</th>
+            <th>QTY</th>
+            <th>PRICE</th>
+        </tr>
+        <% @order_detail.each do |order| %>
+            <tr>
+            	 <td><%= order.order_number %></td>
+               	 <td><%= image_tag order.product.avatar(:thumb) if order.product.avatar? %></td>
+            	 <td><%= order.product.product_name %></td>
+            	 <td><%= order.quantity %></td>
+            	 <td><%= order.product.unit_price %></td>
+            </tr>
+        <% end %>
+</table>

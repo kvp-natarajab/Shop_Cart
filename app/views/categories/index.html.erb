@@ -21,9 +21,7 @@
 	<tr>
 		<th>Category name</th>
 		<th>Description</th>
-		<th>Show</th>
-		<th>Edit</th>
-		<th>Destroy</th>
+		<th>Actions</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -31,13 +29,11 @@
 	<tr>
 		<td><%= cat.name %></td>
 		<td><%= cat.description %></td>
-		<td><%= link_to 'Show', cat %></td>
-		<td>
+		<td><%= link_to 'Show', cat %>
 			<% if can? :update, Category %>
-				<%= link_to 'Edit', edit_category_path(cat)%>
+				|<%= link_to 'Edit', edit_category_path(cat)%>|
 			<% end %>
-		</td>
-		<td>
+			
 			<% if can? :destroy, Category %>
 				<%= link_to 'Delete', cat, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %>
 			<% end %>

@@ -24,9 +24,7 @@
 			<th>Brand name</th>
 			<th>Description</th>
 			<th>Sub Category</th>
-			<th>Show</th>
-			<th>Edit</th>
-			<th>Delete</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -35,13 +33,11 @@
 			<td><%= brand.name %></td>
 			<td><%= brand.description %></td>
 			<td><%= brand.subcategory.name %></td>
-			<td><%= link_to 'Show', brand %></td>
-			<td>
+			<td><%= link_to 'Show', brand %>
+			
 				<% if can? :update, Brand %>
-					<%= link_to 'Edit', edit_brand_path(brand)%>
+					|<%= link_to 'Edit', edit_brand_path(brand)%>|
 				<% end %>
-			</td>
-			<td>
 				<% if can? :destroy, Brand %>
 					<%= link_to 'Delete', brand, method: :delete, data: { confirm: 'Are you sure? category details will be deleted.' } %>
 				<% end %>

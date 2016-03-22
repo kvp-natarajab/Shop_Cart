@@ -265,5 +265,5 @@ Devise.setup do |config|
   config.omniauth :facebook, "KEY", "SECRET"
   config.omniauth :twitter, "udJMkG3miOJJZbwE8iMpqRyWN", "blXBp3685zVTWh4zoNqIaafRPwWkdsxdkMUBw7EqOkgMgQ7LpZ"
   config.omniauth :linkedin, "KEY", "SECRET"
-  config.omniauth :google_oauth2, "948330568685-e52f91od49f3ak10vftcideu1uhgphm0.apps.googleusercontent.com", "pE7w9Zs5SNM_aS2ROV1ey__p", { }
+  config.omniauth :google_oauth2, "457057931848-crkmdjbubjpoobsvcr60nqmp8t8hu7m3.apps.googleusercontent.com", "6WoE7TSOKi_pJYS7AnMDcMCG", { }
 end

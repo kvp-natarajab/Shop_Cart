@@ -14,5 +14,9 @@ class Order < ActiveRecord::Base
   end
 
 
+  def subtotal(quantity,discount,price)
+    ((quantity*price)-(quantity * (price * (discount/100)))).round
+  end
+
  
 end

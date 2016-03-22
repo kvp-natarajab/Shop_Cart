@@ -16,4 +16,21 @@ class CartsController < ApplicationController
     redirect_to cart_path
   end
 
+
+  def unit
+    product = Product.find(params[:product_id])
+    render json: product
+  end
+
+  def status
+    product = Product.find(params[:product])
+    if params[:status]=="checked"
+      product.update_attribute(:active, true)
+      @msg = "Product is activated"
+    else
+      product.update_attribute(:active, false)
+      @msg = "Product is De-activated"
+    end
+    render json:@msg
+  end
 end

@@ -3,7 +3,8 @@ class Product < ActiveRecord::Base
   belongs_to :subcategory
   belongs_to :brand
   belongs_to :user
-
+  belongs_to :shipper
+  
   has_many :order_details, :dependent => :destroy
   has_many :orders, :through => :order_details
 
@@ -19,7 +20,7 @@ class Product < ActiveRecord::Base
   	end
   end
 
-  has_attached_file :avatar, styles: { medium: "600x600", small: "300x300>", thumb: "150x150>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "600x600", small: "300x300>", thumb: "150x150>" }, default_url: "/images/:style/default.png"
   validates_attachment_content_type :avatar, { content_type: ["image/jpeg", "image/gif", "image/png", "image/png"] }
   validates :avatar, attachment_presence: true
   validates_with AttachmentPresenceValidator, attributes: :avatar

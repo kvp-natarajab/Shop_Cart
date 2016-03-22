@@ -52,6 +52,7 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-switch-rails (3.0.2)
     builder (3.2.2)
     byebug (8.2.2)
     cancancan (1.13.1)
@@ -257,7 +258,7 @@ GEM
     redis-store (1.1.7)
       redis (>= 2.2)
     ref (2.0.0)
-    responders (2.1.1)
+    responders (2.1.2)
       railties (>= 4.2.0, < 5.1)
     rubyzip (1.2.0)
     sass (3.4.21)
@@ -312,6 +313,7 @@ PLATFORMS
 DEPENDENCIES
   best_errors
   bootstrap-sass (~> 3.3.6)
+  bootstrap-switch-rails (~> 3.0.0)
   byebug
   cancancan (~> 1.10)
   chosen-rails

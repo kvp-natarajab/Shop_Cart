@@ -12,13 +12,16 @@
  *
  *
  *
-
+*= require bootstrap3-switch
  *= require_self
  *= require_tree .
  */
 
+@import "chosen";
 
-
+.ui-menu-item{
+    background-color:#fff000;
+}
 body{
     font-family: Helvetica,FreeSans,"Liberation Sans",Helmet,Arial,sans-serif;
 }
